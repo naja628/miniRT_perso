@@ -1,0 +1,74 @@
+
+t_vec ft_diffuse(t_vec p, t_vec n, t_light *light, t_vec rgb)
+{
+	float	lum;
+	t_vec	to_light;
+
+	to_light = ft_diff(light->pos, p);
+// 	lum = light->intensity / ft_sqnorm(light_ray);
+	lum = light->intensity;
+	ft_make_unit(&to_light);
+	// since both are unit dot_product is cos
+	lum *= fabs(ft_dot(to_light, n));
+	return (ft_scaled(lum, rgb));
+}
+t_vec	ft_ray_color(t_line *ray, t_scene *scene)
+{
+	float			t;
+	float			min_t;
+	t_shape			*hit;
+	t_shape_list	it;
+	t_vec			color;
+
+	// find closest intersection
+	min_t = -1;
+	it = scene->shapes;
+	while (it)
+	{
+		if (ft_intersect(&t, ray, &it->shape)
+			&& (min_t < 0 || t < min_t))
+		{
+			min_t = t;
+			hit = &it->shape;
+		}
+		it = it->next;
+	}
+	if (min_t < 0)
+		return (ft_vec(0, 0, 0));
+	else
+		color = ft_scaled(scene->ambient, hit->color); 
+	// deal with shadows
+	int shadow = 0;
+	t_line	shadow_ray;
+	shadow_ray.p = ft_point_at_t(ray, min_t);
+	shadow_ray.dir = ft_diff(scene->light.pos, shadow_ray.p);
+	ft_make_unit(&shadow_ray.dir);
+	shadow_ray.p = ft_vec_add(shadow_ray.p, ft_scaled(0.01, shadow_ray.dir));
+	// check side
+	t_vec n = ft_normal(shadow_ray.p, hit);
+	if (ft_dot(n, shadow_ray.dir) * ft_dot(n, ray->dir) > 0)
+		shadow = 1;
+	// check other object hits
+	it = scene->shapes;
+	while (it)
+	{
+		if (ft_intersect(&t, &shadow_ray, &it->shape))
+		{
+			shadow = 1;
+			break;
+		}
+		it = it->next;
+	}
+	// find color
+	if (!shadow)
+	{
+		t_vec p = ft_point_at_t(ray, min_t);
+		color = ft_vec_add(color, ft_diffuse(
+					p,
+					ft_normal(p, hit),
+					&scene->light,
+					hit->color));
+	}
+	return (color);
+}
+

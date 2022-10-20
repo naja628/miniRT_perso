@@ -1,0 +1,175 @@
+#include <math.h>
+#include "shape.h"
+#include "vec.h"
+#include "utypes.h"
+#include "scene.h"
+
+// adjusts the characteristics of the scene so things look "as they should" 
+// after gamma-2 correction
+void	ft_gamma_scene(t_scene *scene)
+{
+	t_shape_list	*it;
+
+	scene->ambient *= scene->ambient;
+	scene->light.intensity *= scene->light.intensity;
+	it = scene->shapes;
+	while (it)
+	{
+		it->shape.color.x *= it->shape.color.x;
+		it->shape.color.y *= it->shape.color.y;
+		it->shape.color.z *= it->shape.color.z;
+		it = it->next;
+	}
+}
+
+static t_vec	ft_reflect(t_vec incident, t_vec normal)
+{
+	t_vec reflected;
+
+	reflected = ft_scaled(-2 * ft_dot(normal, incident), normal);
+	reflected = ft_vec_add(reflected, incident);
+	return reflected;
+}
+
+static float ft_fastexp(float x, int pow)
+{
+	float	step;
+	if (pow == 0)
+		return (1);
+	if (pow % 2 == 1)
+		return (x * ft_fastexp(x * x, pow / 2));
+	else
+		return (ft_fastexp(x * x, pow / 2));
+}
+
+float ft_specular(t_hit *hit, t_vec incident, t_light *light)
+{
+	const int alpha = 16;
+	t_vec	to_light;
+	t_vec 	reflected;
+	float	cos;
+	
+	to_light = ft_diff(light->pos, hit->p);
+	ft_make_unit(&to_light);
+	reflected = ft_reflect(incident, hit->n);
+	// reflected should already be unit
+	// ft_make_unit(reflected);
+	cos = ft_dot(reflected, to_light);
+	if (cos > 0)
+		return (ft_fastexp(cos, alpha));
+	else
+		return (0);
+}
+
+t_vec	ft_ray_color(t_line	*ray, t_scene *scene, int depth)
+{
+	t_vec	color;
+	t_hit	hit;
+	float	matte;
+
+	color = ft_vec(0, 0, 0);
+	// light "flares"
+	// TODO account for objects in between
+	t_vec flare = ft_vec(0, 0, 0);
+	t_vec to_light = ft_diff(scene->light.pos, ray->p);
+	ft_make_unit(&to_light);
+	float cos = ft_dot(ray->dir, to_light);
+	if (cos > 0)
+		flare = (ft_scaled(ft_fastexp(cos, 256), ft_vec(1, 1, 1)));
+	color = ft_vec_add(color, flare);
+	if (!ft_closest_hit(&hit, ray, scene->shapes))
+		return (color);
+	matte = scene->ambient;
+	// change to loop if multiple lights
+	if (!ft_shadowed(&hit, ray, scene))
+	{
+		matte += hit.shape->dif_coef * ft_diffuse(&hit, &scene->light);
+		color = ft_scaled(hit.shape->spec_coef, ft_vec(1, 1, 1));
+		ft_scale(ft_specular(&hit, ray->dir, &scene->light), &color);
+	}
+	color = ft_vec_add(color, ft_scaled(matte, hit.shape->color));
+	// reflections
+	if (depth > 0)
+	{
+		t_line	reflected;
+		t_vec	refl_color;
+		reflected.dir = ft_reflect(ray->dir, hit.n);
+		reflected.p = ft_vec_add(hit.p, ft_scaled(0.01, reflected.dir));
+		refl_color = ft_ray_color(&reflected, scene, depth - 1);
+		color = ft_vec_add(color, ft_scaled(hit.shape->refl_coef, refl_color));
+	}
+	return (color);
+}
+
+float ft_diffuse(t_hit *hit, t_light *light)
+{
+	float	lum;
+	t_vec	to_light;
+
+	to_light = ft_diff(light->pos, hit->p);
+	lum = light->intensity;
+// 	lum /= ft_sqnorm(to_light);
+	ft_make_unit(&to_light);
+	lum *= fabs(ft_dot(to_light, hit->n));
+	return (lum);
+}
+
+int	ft_closest_hit(t_hit *hit, t_line *ray, t_shape_list *shapes)
+{
+	float	t;
+	float	min_t;
+	t_shape_list	*it;
+	t_shape	*hit_shape;
+
+
+	min_t = -1;
+	it = shapes;
+	while (it)
+	{
+		if (ft_intersect(&t, ray, &it->shape)
+			&& (min_t < 0 || t < min_t))
+		{
+			min_t = t;
+			hit_shape = &it->shape;
+		}
+		it = it->next;
+	}
+	if (min_t < 0)
+		return (0);
+	ft_make_hit(hit, hit_shape, ft_point_at_t(ray, min_t));
+	return (1);
+}
+
+void	ft_make_hit(t_hit *hit, t_shape *shape, t_vec p)
+{
+	hit->p = p;
+	hit->shape = shape;
+	hit->n = ft_normal(p, shape);
+}
+
+int	ft_shadowed(t_hit *hit, t_line *ray, t_scene *scene) 
+{
+	int shadow = 0;
+	t_line	shadow_ray;
+	t_shape_list *it;
+	float	dummy;
+	const float eps = 0.01;
+
+	shadow_ray.dir = ft_diff(scene->light.pos, hit->p);
+	ft_make_unit(&shadow_ray.dir);
+	shadow_ray.p = ft_vec_add(hit->p, ft_scaled(eps, shadow_ray.dir));
+	if (ft_dot(hit->n, shadow_ray.dir) * ft_dot(hit->n, ray->dir) > 0)
+		return (1);
+	it = scene->shapes;
+	while (it)
+	{
+		if (ft_intersect(&dummy, &shadow_ray, &it->shape))
+			return (1);
+		it = it->next;
+	}
+	return (0);
+}
+
+
+
+

@@ -1,0 +1,19 @@
+#include <stdio.h>
+#include "geom_utils.h"
+#include "vec.h"
+#include "debug.h"
+
+int main(int ac, char **av)
+{
+	t_vec ante = {0.3333, 0.6667, 0.6667};
+	t_vec im = ft_overlay(ft_vec(-0.3333, -0.6667, 0.6667), ante); // z^ normally
+	t_vec imz = ft_overlay(ft_vec(-0.3333, -0.6667, 0.6667), ft_vec(0, 0, 1)); // arg1
+// 	t_vec im_perp1 = ft_overlay(ft_vec(-0.3333, -0.6667, 0.6667), ft_vec(0, 0.8, 0.6));
+// 	t_vec imx = ft_overlay(ft_vec(-0.3333, -0.6667, 0.6667), ft_vec(1, 0, 0));
+	printf("ante %f, im ante %f\n", ft_norm(ante), ft_norm(im));
+	print_vec("im ante", im);
+	print_vec("im z", imz);
+// 	print_vec("im perp1", im_perp1);
+// 	print_vec("im x", imx);
+
+ }
