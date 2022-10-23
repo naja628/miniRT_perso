@@ -6,7 +6,7 @@
 #    By: xle-boul <xle-boul@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/24 23:28:49 by xle-boul          #+#    #+#              #
-#    Updated: 2022/10/20 17:29:28 by xle-boul         ###   ########.fr        #
+#    Updated: 2022/10/23 23:45:45 by xle-boul         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,13 +21,25 @@ UNDERLINE	= \e[4m
 RESET		= \033[0m
 END			= \e[0m
 
+OS = $(shell uname -s)
+
 NAME := miniRT
 
 CC := gcc
 CFLAGS := -Werror -Wall -Wextra
-#EXTRA_FLAGS := -Lmlx_linux -lmlx_Linux -L/usr/local/lib -Imlx_linux -lXext -lX11 -lm
-EXTRA_FLAGS := -lmlx -framework OpenGL -framework AppKit
 
+ifeq ($(OS),Linux)
+	EXTRA_FLAGS := -Lsources/mlx_linux -lmlx -Isources/mlx_linux -lXext -lX11 -lm
+	LIB_DIR := sources/mlx_linux
+	LIB_OBJ := sources/mlx_linux/obj/*.o
+	LIB_OBJ_DIR := sources/mlx_linux/obj
+	LIB := libmlx_Linux.a
+else
+	EXTRA_FLAGS := -lmlx -framework OpenGL -framework AppKit
+	LIB_DIR := sources/mlx
+	LIB_OBJ := sources/mlx/*.o
+	LIB := libmlx.a
+endif
 
 INCLUDES := -I includes
 
@@ -47,18 +59,22 @@ OBJ_FILES := $(addprefix $(OBJ_DIR)/,$(notdir $(SRC_FILES:.c=.o)))
 RM := rm -rf
 MKDIR := mkdir -p
 
-LIB_DIR := sources/mlx
-LIB_OBJ := sources/mlx/*.o
-LIB := libmlx.a
 
 VPATH := $(SOURCEDIRS)
 
 all: $(NAME)
 
 $(NAME): $(LIB) $(OBJ_FILES)
+ifeq ($(OS),Linux)
+	@printf "$(YELLOW)Linking miniRT...\n\n$(END)"
+	$(CC) $(LIB_OBJ) $(INCLUDES) $(EXTRA_FLAGS) $(OBJ_FILES) $(LIB) -o $@ -lm
+	@printf "\n$(GREEN)miniRT compiled.\n$(END)"
+else
 	@printf "$(YELLOW)Linking miniRT...\n\n$(END)"
 	$(CC) $(INCLUDES) $(EXTRA_FLAGS) $(OBJ_FILES) $(LIB) -o $@ -lm
 	@printf "\n$(GREEN)miniRT compiled.\n$(END)"
+endif
+
 
 $(OBJ_DIR)/%.o : %.c
 	@$(MKDIR) $(OBJ_DIR)
@@ -67,7 +83,7 @@ $(OBJ_DIR)/%.o : %.c
 	@printf "$(GREEN)Object $(UNDERLINE)$(WHITE)$(notdir $@)$(END)$(GREEN) successfully compiled\n\n$(END)"
 
 $(LIB):
-	@printf "$(YELLOW)Compiling minilibx_linux.a...\n$(END)"
+	@printf "$(YELLOW)Compiling $(LIB)...\n$(END)"
 	@make --no-print-directory -C $(LIB_DIR)
 	@mv $(LIB_DIR)/$(LIB) .
 	@printf "$(GREEN)$(LIB) compiled\n\n$(END)"
