@@ -37,6 +37,7 @@ else
 endif
 
 INCLUDES := -I includes -I$(LIB_DIR)
+LIB := $(LIB_DIR)/libmlx.a
 
 SRC_DIR := sources
 OBJ_DIR := objs
@@ -60,15 +61,18 @@ VPATH := $(SOURCEDIRS)
 all: $(NAME)
 
 $(NAME): $(LIB) $(OBJ_FILES)
-ifeq ($(OS),Linux)
 	@printf "$(YELLOW)Linking miniRT...\n\n$(END)"
-	$(CC) $(LIB_OBJ) $(INCLUDES) $(OBJ_FILES) $(LIB) -o $@ -lm $(EXTRA_FLAGS) 
+	$(CC) $(OBJ_FILES) -o $@ $(INCLUDES) $(EXTRA_FLAGS) -lm 
 	@printf "\n$(GREEN)miniRT compiled.\n$(END)"
-else
-	@printf "$(YELLOW)Linking miniRT...\n\n$(END)"
-	$(CC) $(INCLUDES) $(EXTRA_FLAGS) $(OBJ_FILES) $(LIB) -o $@ -lm
-	@printf "\n$(GREEN)miniRT compiled.\n$(END)"
-endif
+#ifeq ($(OS),Linux)
+#	@printf "$(YELLOW)Linking miniRT...\n\n$(END)"
+#	$(CC) $(LIB_OBJ) $(INCLUDES) $(OBJ_FILES) $(LIB) -o $@ -lm $(EXTRA_FLAGS) 
+#	@printf "\n$(GREEN)miniRT compiled.\n$(END)"
+#else
+#	@printf "$(YELLOW)Linking miniRT...\n\n$(END)"
+#	$(CC) $(INCLUDES) $(EXTRA_FLAGS) $(OBJ_FILES) $(LIB) -o $@ -lm
+#	@printf "\n$(GREEN)miniRT compiled.\n$(END)"
+#endif
 
 
 $(OBJ_DIR)/%.o : %.c
