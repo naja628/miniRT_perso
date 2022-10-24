@@ -29,19 +29,14 @@ CC := gcc
 CFLAGS := -Werror -Wall -Wextra
 
 ifeq ($(OS),Linux)
-	EXTRA_FLAGS := -Lsources/mlx_linux -lmlx -Isources/mlx_linux -lXext -lX11 -lm
 	LIB_DIR := sources/mlx_linux
-	LIB_OBJ := sources/mlx_linux/obj/*.o
-	LIB_OBJ_DIR := sources/mlx_linux/obj
-	LIB := libmlx_Linux.a
+	EXTRA_FLAGS := -L$(LIB_DIR) -lmlx -I$(LIB_DIR) -lXext -lX11 -lm
 else
-	EXTRA_FLAGS := -lmlx -framework OpenGL -framework AppKit
-	LIB_DIR := sources/mlx
-	LIB_OBJ := sources/mlx/*.o
-	LIB := libmlx.a
+	LIB_DIR	:= sources/mlx
+	EXTRA_FLAGS	:= -L$(LIB_DIR) -lmlx -I$(LIB_DIR) -framework OpenGL -framework AppKit
 endif
 
-INCLUDES := -I includes
+INCLUDES := -I includes -I$(LIB_DIR)
 
 SRC_DIR := sources
 OBJ_DIR := objs
@@ -67,7 +62,7 @@ all: $(NAME)
 $(NAME): $(LIB) $(OBJ_FILES)
 ifeq ($(OS),Linux)
 	@printf "$(YELLOW)Linking miniRT...\n\n$(END)"
-	$(CC) $(LIB_OBJ) $(INCLUDES) $(EXTRA_FLAGS) $(OBJ_FILES) $(LIB) -o $@ -lm
+	$(CC) $(LIB_OBJ) $(INCLUDES) $(OBJ_FILES) $(LIB) -o $@ -lm $(EXTRA_FLAGS) 
 	@printf "\n$(GREEN)miniRT compiled.\n$(END)"
 else
 	@printf "$(YELLOW)Linking miniRT...\n\n$(END)"
@@ -84,14 +79,13 @@ $(OBJ_DIR)/%.o : %.c
 
 $(LIB):
 	@printf "$(YELLOW)Compiling $(LIB)...\n$(END)"
-	@make --no-print-directory -C $(LIB_DIR)
-	@mv $(LIB_DIR)/$(LIB) .
+	cd $(LIB_DIR) && make
 	@printf "$(GREEN)$(LIB) compiled\n\n$(END)"
 
 clean:
 	@printf "$(YELLOW)Removing objects...\n$(END)"
 	$(RM) $(OBJ_DIR)
-	$(RM) $(LIB_OBJ)
+	cd $(LIB_DIR) && make clean
 	@printf "$(GREEN)Objects removed!\n\n$(END)"
 
 fclean: clean
