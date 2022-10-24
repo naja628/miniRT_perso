@@ -11,8 +11,6 @@ static float	ft_hyp(float slope)
 	return (sqrt(1 + slope * slope));
 }
 
-// #include <stdio.h>
-
 int ft_cn_inter(float *t, t_line *ray, void *cn_data)
 {
 	t_cone	*cn;
@@ -58,15 +56,22 @@ t_vec	ft_cn_normal(t_vec p, void *cn_data)
 	ft_para_perp(cn->dir, ft_diff(p, cn->p), &para, &normal);
 	height = ft_dot(cn->dir, para);
 	hyp = ft_hyp(cn->slope); 
-// 	printf("perp norm: %f, expected %f, ratio %f\n", ft_norm(normal), height * cn->slope, ft_norm(normal) / (height * cn->slope));
-	// sqrt(10) ratio error wtf??? (TODO)
 	ft_scale(1.0 / (height * cn->slope * hyp), &normal);
 	ft_add_to(&normal, ft_scaled(-(cn->slope / hyp), cn->dir));
-// 	ft_make_unit(&normal);
-// 	ft_add_to(&normal, ft_scaled(-cn->slope, cn->dir));
-// 	ft_make_unit(&normal);
-// 	printf("normal norm: %f\n", ft_norm(normal));
 	return (normal);
+}
+
+static void	ft_cn_basis(t_vec p, void *cn_data, t_basis *basis) 
+{
+	t_cone	*cn;
+	t_vec	normal;
+	t_vec	y_dir;
+
+	cn = (t_cone *) cn_data;
+	normal = ft_cn_normal(p, cn_data);
+	y_dir = p - cn->p;
+	ft_make_unit(&y_dir);
+	ft_complete_basis2(normal, y_dir, basis);
 }
 
 // y goes to height, x goes to angle times radius
@@ -83,7 +88,7 @@ t_vec2	ft_cn_map(t_vec p, void *cn_data, t_basis *basis)
 	xy.y = ft_hyp(cn->slope) * ft_dot(para, cn->dir);
 	ft_make_unit(&perp);
 	if (basis)
-		ft_complete_basis2(perp, ft_scaled(-1, cn->dir), basis);
+		ft_cn_basis(p, cn_data, basis);
 	// TODO decide if store angle-zero
 	if (!ft_colin(cn->dir, ft_vec(1, 0, 0)))
 		angle_zero = ft_cross(ft_vec(1, 0, 0), cn->dir);
