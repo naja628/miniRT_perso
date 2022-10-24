@@ -64,8 +64,11 @@ int	ft_quit(t_mem *mem)
 	exit(0);
 }
 
-#define ESC 65307 // Linux
-// #define ESC 53 // MAC
+#ifdef LINUX
+# define ESC 65307 // Linux
+#else
+# define ESC 53 // MAC
+#endif
 
 // meant to be passed to mlx_key_hook
 int	ft_esc_exit_hook(int keycode, t_mem *mem)

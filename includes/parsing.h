@@ -6,7 +6,7 @@
 /*   By: xle-boul <xle-boul@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 21:17:35 by xle-boul          #+#    #+#             */
-/*   Updated: 2022/10/20 19:00:10 by xle-boul         ###   ########.fr       */
+/*   Updated: 2022/10/24 18:12:44 by xle-boul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef struct s_parse
 	t_scene		scene;
 	int			fd;
 	char		*line;
+	void		*mlx;
 }				t_parse;
 /*
 	error codes:
@@ -76,6 +77,13 @@ char	**ft_split(char const *s, char c);
 char	*skip_spaces(char *line);
 int		ft_atoi_minirt(char **str);
 float	ft_atof_minirt(char **str);
+
+// parsing
+
+void	print_all_data(t_parse intel);
+int		check_extension(char *file);
+t_parse	read_intel(char *av);
+void	init_intel(t_parse *intel);
 
 // data handling
 

@@ -6,7 +6,7 @@
 /*   By: xle-boul <xle-boul@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 21:17:08 by xle-boul          #+#    #+#             */
-/*   Updated: 2022/10/20 19:10:21 by xle-boul         ###   ########.fr       */
+/*   Updated: 2022/10/24 17:54:23 by xle-boul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,6 @@ t_parse	read_intel(char *av)
 
 int	check_extension(char *file)
 {
-	int	count;
-
-	count = 0;
 	if (ft_strnstr(file, ".rt", ft_strlen(file)) == NULL)
 		return (1);
 	if (file[ft_strlen(file) - 1] != 't' || file[ft_strlen(file) - 2] != 'r'
@@ -74,50 +71,9 @@ void	print_all_data(t_parse intel)
 	print_vec("ambient color", intel.scene.ambient_color);
 	printf("shape type = %d\n", intel.scene.shapes->shape.type);
 	print_vec("shape color", intel.scene.shapes->shape.color);
-	// print_vec("shape center", (t_sphere *)intel.scene.shapes->shape.data.center);
+	printf("dif coef %f\n", intel.scene.shapes->shape.dif_coef);
+	printf("spec coef %f\n", intel.scene.shapes->shape.spec_coef);
+	printf("refl coef %f\n", intel.scene.shapes->shape.refl_coef);
+	printf("map height %f\n", intel.scene.shapes->shape.map_height);
 }
 
-#include "debug.h"
-#include "render_scr.h"
-void	ft_gamma_scene(t_scene *scene);
-static int ft_pixel_color(int x, int y, int scr_w, t_scene *sce, t_camera *cam);
-void	ft_render_scr(t_scr *scr, t_camera *cam, t_scene *scene);
-int	main(int ac, char **av)
-{
-	t_parse	intel;
-	t_scr	scr;
-	t_camera cam;
-	t_mem	mem;
-
-
-	init_intel(&intel);
-	if (ac != 2)
-		error_handler(0);
-	if (check_extension(av[1]) != 0)
-		error_handler(1);
-	intel = read_intel(av[1]);
-	print_all_data(intel);
-
-	cam = intel.cam;
-	ft_init_scr(&scr, 1000, 700, "miniRT");
-
-	// hardcone same scene as test.rt
-// 	t_light_list lights = {{ft_vec(0, 0, 3), 0.7, ft_vec(1, 1, 1)}, NULL};
-// 	t_sphere sp = {ft_vec(0, 0, 0), 1};
-// 	t_shape_list	shapes = {{SHP_SPHERE, &sp, ft_vec(1, 0, 0), 0, 1}, NULL};
-// 	t_scene		hardsce = {0.2, ft_vec(1, 1, 1), &lights, &shapes};
-// 	t_camera	hardcam;
-// 	ft_init_camera(&hardcam, ft_vec(0, -5, 0), ft_vec(0, 1, 0), 70);
-// 	ft_mk_camscreen(&hardcam, (float) 700 / 1000);
-
-	ft_mk_camscreen(&cam, (float) 700 / 1000);
-	ft_render_scr(&scr, &cam, &(intel.scene));
-	mlx_put_image_to_window(scr.mlx, scr.win, scr.imptr, 0, 0);
-	printf("done\n"); // TODO (is printf allowed??)
-	mem.scene = &(intel.scene);
-	mem.scr = &scr;
-	mlx_key_hook(scr.win, ft_esc_exit_hook, &mem);
-	mlx_hook(scr.win, 17, 0, ft_quit, &mem);
-	mlx_loop(scr.mlx);
-	return (0);
-}

@@ -6,7 +6,7 @@
 #    By: xle-boul <xle-boul@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/24 23:28:49 by xle-boul          #+#    #+#              #
-#    Updated: 2022/10/23 23:45:45 by xle-boul         ###   ########.fr        #
+#    Updated: 2022/10/24 18:27:21 by xle-boul         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,9 +29,11 @@ CC := gcc
 CFLAGS := -Werror -Wall -Wextra
 
 ifeq ($(OS),Linux)
+	D_OS := -D LINUX
 	LIB_DIR := sources/mlx_linux
 	EXTRA_FLAGS := -L$(LIB_DIR) -lmlx -I$(LIB_DIR) -lXext -lX11 -lm
 else
+	D_OS := -D MAC 
 	LIB_DIR	:= sources/mlx
 	EXTRA_FLAGS	:= -L$(LIB_DIR) -lmlx -I$(LIB_DIR) -framework OpenGL -framework AppKit
 endif
@@ -45,7 +47,7 @@ OBJ_DIR := objs
 #
 # INSERT HERE THE NAMES OF THE FOLDERS INTO SOURCES THAT YOU WANT TO COMPILE
 #
-SUB_DIRS := parsing gnl ray_tracing
+SUB_DIRS := parsing gnl ray_tracing main
 
 SOURCEDIRS := $(foreach dir, $(SUB_DIRS), $(addprefix $(SRC_DIR)/, $(dir)))
 
@@ -62,7 +64,7 @@ all: $(NAME)
 
 $(NAME): $(LIB) $(OBJ_FILES)
 	@printf "$(YELLOW)Linking miniRT...\n\n$(END)"
-	$(CC) $(OBJ_FILES) -o $@ $(INCLUDES) $(EXTRA_FLAGS) -lm 
+	$(CC) $(OBJ_FILES) -o $@ $(INCLUDES) $(EXTRA_FLAGS) -lm
 	@printf "\n$(GREEN)miniRT compiled.\n$(END)"
 #ifeq ($(OS),Linux)
 #	@printf "$(YELLOW)Linking miniRT...\n\n$(END)"
@@ -78,7 +80,7 @@ $(NAME): $(LIB) $(OBJ_FILES)
 $(OBJ_DIR)/%.o : %.c
 	@$(MKDIR) $(OBJ_DIR)
 	@printf "$(YELLOW)Compiling object:\n$(END)"
-	$(CC) $(INCLUDES) -Imlx -c -o $@ $<
+	$(CC) $(INCLUDES) $(D_OS) -Imlx -c -o $@ $<
 	@printf "$(GREEN)Object $(UNDERLINE)$(WHITE)$(notdir $@)$(END)$(GREEN) successfully compiled\n\n$(END)"
 
 $(LIB):
