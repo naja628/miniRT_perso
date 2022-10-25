@@ -15,8 +15,6 @@
 // # include <X11/extensions/XShm.h>
 // # include <X11/XKBlib.h>
 
-#define E_LOADING 1
-#define E_NOT32 2
 // make imdata struct from xpm image (given by filename)
 // possible errors (returns)
 // 1 : error loading file
@@ -38,10 +36,7 @@ int	ft_xpm_to_imdata(void *mlx, char *filename, t_imdata *buff, void **delendum)
 	*delendum = img;
 // 	mlx_destroy_image(mlx, img);
 	if (bitspp != 32)
-	{
-		// TODO maybe print warning
 		return (E_NOT32);
-	}
 	return (0);
 }
 

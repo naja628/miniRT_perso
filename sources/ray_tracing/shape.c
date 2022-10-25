@@ -40,9 +40,12 @@ t_vec	ft_normal(t_vec p, t_shape *s)
 	normal = ft_get_perturb(xy, s->map_height, s->bump_map);
 	if (s->type == SHP_SPHERE && (xy.x == 0)) // xy.x == 0 -> would div 0
 	{
-		// TODO handle div by 0 problems
 		normal.x /= sin(xy.y / ((t_sphere *)(s->data))->radius);
 		ft_make_unit(&normal);
+	}
+	if (s->type == SHP_CYLIN && !(ft_near_zero(xy.y, 0.001)))
+	{
+		normal.x /= sqrt((t_cone *)(s->data)->slope);
 	}
 	normal = ft_in_basis(&basis, normal);
 	return (normal);
