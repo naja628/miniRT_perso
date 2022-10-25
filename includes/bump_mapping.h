@@ -15,7 +15,7 @@ typedef struct s_normals
 	t_vec	*data;
 }	t_normals;
 
-int		ft_xpm_to_imdata(void *mlx, char *filename, t_imdata *buff);
+int		ft_xpm_to_imdata(void *mlx, char *filename, t_imdata *buff, void **delme);
 void	ft_mk_normal_map(t_normals *map, t_imdata *heights, float maxh);
 int		ft_xpm_to_normals(void *mlx, t_normals *map, char *fn, float maxh);
 

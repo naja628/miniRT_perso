@@ -20,30 +20,29 @@ void	init_intel(t_parse *intel)
 	intel->scene.shapes = NULL;
 }
 
-t_parse	read_intel(char *av)
+void	read_intel(char *av, t_parse *intel)
 {
-	t_parse	intel;
 	int		exit_code;
 
-	init_intel(&intel);
+// 	init_intel(intel);
 	exit_code = 0;
-	intel.fd = open(av, O_RDONLY);
-	if (intel.fd == -1)
+	intel->fd = open(av, O_RDONLY);
+	if (intel->fd == -1)
 		error_handler(2);
 	while (19)
 	{
-		intel.line = get_next_line(intel.fd);
-		if (!intel.line)
+		intel->line = get_next_line(intel->fd);
+		if (!intel->line)
 		{
-			free(intel.line);
+			free(intel->line);
 			break ;
 		}
-		exit_code = read_id(&intel);
-		free(intel.line);
+		exit_code = read_id(intel);
+		free(intel->line);
 		if (exit_code == 1)
 			break ;
 	}
-	close(intel.fd);
+	close(intel->fd);
 	if (exit_code == 1)
 		exit(EXIT_FAILURE);
 	return (intel);

@@ -14,9 +14,9 @@
 
 #include "debug.h"
 #include "render_scr.h"
-void	ft_gamma_scene(t_scene *scene);
-static int ft_pixel_color(int x, int y, int scr_w, t_scene *sce, t_camera *cam);
-void	ft_render_scr(t_scr *scr, t_camera *cam, t_scene *scene);
+// void	ft_gamma_scene(t_scene *scene);
+// static int ft_pixel_color(int x, int y, int scr_w, t_scene *sce, t_camera *cam);
+// void	ft_render_scr(t_scr *scr, t_camera *cam, t_scene *scene);
 int	main(int ac, char **av)
 {
 	t_parse	intel;
@@ -25,17 +25,16 @@ int	main(int ac, char **av)
 	t_mem	mem;
 
 
-	init_intel(&intel);
 	if (ac != 2)
 		error_handler(0);
 	if (check_extension(av[1]) != 0)
 		error_handler(1);
 	ft_init_scr(&scr, 1000, 700, "miniRT");
+	init_intel(&intel);
 	intel.mlx = scr.mlx;
-	intel = read_intel(av[1]);
-	print_all_data(intel);
+	read_intel(av[1], &intel);
 
-	cam = intel.cam;
+	print_all_data(intel);
 
 	// hardcone same scene as test.rt
 // 	t_light_list lights = {{ft_vec(0, 0, 3), 0.7, ft_vec(1, 1, 1)}, NULL};
@@ -46,6 +45,7 @@ int	main(int ac, char **av)
 // 	ft_init_camera(&hardcam, ft_vec(0, -5, 0), ft_vec(0, 1, 0), 70);
 // 	ft_mk_camscreen(&hardcam, (float) 700 / 1000);
 
+	cam = intel.cam;
 	ft_mk_camscreen(&cam, (float) 700 / 1000);
 	ft_render_scr(&scr, &cam, &(intel.scene));
 	mlx_put_image_to_window(scr.mlx, scr.win, scr.imptr, 0, 0);

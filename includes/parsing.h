@@ -82,7 +82,7 @@ float	ft_atof_minirt(char **str);
 
 void	print_all_data(t_parse intel);
 int		check_extension(char *file);
-t_parse	read_intel(char *av);
+void	read_intel(char *av, t_parse *intel);
 void	init_intel(t_parse *intel);
 
 // data handling

@@ -23,7 +23,8 @@
 // 2 : native encoding of color is not 32 bits
 // this makes the data unreadable (write-only) using only mlx_functions
 // so we can't do bump_mapping
-int	ft_xpm_to_imdata(void *mlx, char *filename, t_imdata *buff)
+#include <stdio.h>
+int	ft_xpm_to_imdata(void *mlx, char *filename, t_imdata *buff, void **delendum)
 {
 	void	*img;
 	int		bitspp;
@@ -34,25 +35,27 @@ int	ft_xpm_to_imdata(void *mlx, char *filename, t_imdata *buff)
 	if (!img)
 		return (E_LOADING);
 	buff->data = mlx_get_data_addr(img, &bitspp, &b, &c);
-	mlx_destroy_image(mlx, img);
+	*delendum = img;
+// 	mlx_destroy_image(mlx, img);
 	if (bitspp != 32)
 	{
 		// TODO maybe print warning
 		return (E_NOT32);
 	}
-	else
-		return (0);
+	return (0);
 }
 
 int	ft_xpm_to_normals(void *mlx, t_normals *map, char *fn, float maxh)
 {
 	t_imdata	imdata;
 	int			errcode;
+	void 		*img_to_del;
 
-	errcode = ft_xpm_to_imdata(mlx, fn, &imdata);
+	errcode = ft_xpm_to_imdata(mlx, fn, &imdata, &img_to_del);
 	if (errcode == 0)
 		ft_mk_normal_map(map, &imdata, maxh);
 	else
 		map->data = NULL;
+	mlx_destroy_image(mlx, img_to_del);
 	return (errcode);
 }

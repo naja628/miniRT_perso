@@ -82,18 +82,22 @@ int	read_bonus(char *line, t_shape_list *new, void *mlx)
 	new->shape.is_checkered = ft_atoi_minirt(&line);
 	if (eol_checker(&line) == 0)
 		return (0);
+	printf("rb0\n");
 	map = malloc(sizeof(t_normals));
 	if (!map)
 		error_handler(0);
+	printf("map %p\n", map);
 	file_name = copy_xpm(&line, file_name_length(line));
-	printf("file name = %s\n", file_name);
+	printf("file name = _%s_\n", file_name);
 	line = skip_spaces(line);
 	new->shape.map_height = ft_atof_minirt(&line);
 	if (check_xpm(file_name) == 0)
 	{
+		printf("rb1\n");
 		// printf("scanned correctly\n");
-		ft_xpm_to_normals(mlx, map, file_name, 0.05);
+		printf("err %d", ft_xpm_to_normals(mlx, map, file_name, 0.05));
 		new->shape.bump_map = map;
+		printf("rb2\n");
 	}
 	//mlx has to arrive here ^
 	return (0);
