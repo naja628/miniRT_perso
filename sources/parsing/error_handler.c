@@ -6,7 +6,7 @@
 /*   By: xle-boul <xle-boul@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 21:44:11 by xle-boul          #+#    #+#             */
-/*   Updated: 2022/09/26 21:01:57 by xle-boul         ###   ########.fr       */
+/*   Updated: 2022/10/25 22:34:53 by xle-boul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,15 @@
 
 int	error_handler(int error)
 {
-	if (error == 0)
-		printf("Error!\nWrong number of arguments\n");
-	else if (error == 1)
+	if (error == MALLOC_ERR)
+		printf("Error!\nMalloc failed\n");
+	else if (error == FILE_EXT_ERR)
 		printf("Error!\nFile extension must be .rt\n");
-	else if (error == 2)
+	else if (error == READ_FILE_ERR)
 		printf("Error!\nCould not read file\n");
-	else if (error == 3)
-		printf("Error!\nWrong number of arguments\n");
-	else if (error == 4)
+	else if (error == INVALID_DATA_ERR)
+		printf("Error!\nData provided is corrupted\n");
+	else if (error == ARGUMENTS_ERR)
 		printf("Error!\nWrong number of arguments\n");
 	exit(EXIT_FAILURE);
 }

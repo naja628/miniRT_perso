@@ -6,7 +6,7 @@
 /*   By: xle-boul <xle-boul@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 21:17:35 by xle-boul          #+#    #+#             */
-/*   Updated: 2022/10/24 18:12:44 by xle-boul         ###   ########.fr       */
+/*   Updated: 2022/10/25 22:29:50 by xle-boul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,12 @@
 # define CYLINDER "cy"
 # define CONE "cn"
 
-/*	id		name				extensions
-	A		ambiant light		ambiant + colors
-	C		camera				coord xyz + vector (orientation) + FOV
-	L		light				coord xyz + ratio brightness + (bonus) color
-	sp		sphere				coord xyz + diameter (!ray) + color
-	pl		plane				coord xyz + vector (orientation) + color
-	cy		cylinder			coord xyz + vector (orientation) + diameter + hight + color
-*/
+# define MALLOC_ERR 0
+# define FILE_EXT_ERR 1
+# define READ_FILE_ERR 2
+# define INVALID_DATA_ERR 3
+# define ARGUMENTS_ERR 4
+
 typedef struct s_parse
 {
 	int			error;
@@ -82,7 +80,7 @@ float	ft_atof_minirt(char **str);
 
 void	print_all_data(t_parse intel);
 int		check_extension(char *file);
-t_parse	read_intel(char *av);
+void	read_intel(char *av, t_parse *intel);
 void	init_intel(t_parse *intel);
 
 // data handling
@@ -97,6 +95,13 @@ void	read_shape(t_parse *intel, char *line, t_read fun, t_shapetype type);
 void	read_light(t_parse *intel, char *line);
 void	read_camera(t_parse *intel, char *line);
 void	read_ambient_light(t_parse *intel, char *line);
+int		read_bonus(char *line, t_shape_list *new, void *mlx, int *error);
+
+// data utilities
+
+t_vec	read_color(char **line, int *error);
+t_vec	read_vec(char **line, int *error);
+int		eol_checker(char **line);
 
 // free stuff
 

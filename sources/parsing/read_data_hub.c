@@ -6,17 +6,12 @@
 /*   By: xle-boul <xle-boul@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 23:03:04 by xle-boul          #+#    #+#             */
-/*   Updated: 2022/10/20 19:08:16 by xle-boul         ###   ########.fr       */
+/*   Updated: 2022/10/25 21:28:50 by xle-boul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 #include "debug.h"
-
-// TODO copy line and send it to functions in order to check the end of the line
-// after use: (line **)
-// if (*line == '\n')
-// intel->error = 2;
 
 int	read_id(t_parse *intel)
 {

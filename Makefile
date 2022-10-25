@@ -6,7 +6,7 @@
 #    By: xle-boul <xle-boul@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/24 23:28:49 by xle-boul          #+#    #+#              #
-#    Updated: 2022/10/24 18:27:21 by xle-boul         ###   ########.fr        #
+#    Updated: 2022/10/25 22:33:27 by xle-boul         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -103,6 +103,6 @@ fclean: clean
 re: fclean all
 
 norm:
-	@norminette includes sources/gnl sources/parsing sources/ray_tracing
+	@norminette includes sources/gnl sources/parsing sources/ray_tracing sources/main
 
 .PHONY: clean fclean all re

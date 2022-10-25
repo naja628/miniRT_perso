@@ -6,7 +6,7 @@
 /*   By: xle-boul <xle-boul@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 17:44:45 by xle-boul          #+#    #+#             */
-/*   Updated: 2022/10/24 18:16:30 by xle-boul         ###   ########.fr       */
+/*   Updated: 2022/10/25 20:43:50 by xle-boul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	main(int ac, char **av)
 		error_handler(1);
 	ft_init_scr(&scr, 1000, 700, "miniRT");
 	intel.mlx = scr.mlx;
-	intel = read_intel(av[1]);
+	read_intel(av[1], &intel);
 	print_all_data(intel);
 
 	cam = intel.cam;
