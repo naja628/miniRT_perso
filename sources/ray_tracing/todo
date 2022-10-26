@@ -2,11 +2,15 @@ bump mapping reflection thing (DONE)
 bump mapping shadow thing (DONE)
 checkrering accounts for color (DONE)
 optional flares (DONE as comments. needs parsing modif)
-parsing :
-	tabs
-	flare thing
-	comments
-	set default material?
-compile with warnings
+compile with warnings (DONE)
+is bump mapping on the cone the wrong way around (???) 
+maybe don't render the cone vertex to avoid ugly white pixel 
 norminette
+progress info
+parsing:	
+	tabs (DONE)
+	free xpm name (DONE)
+	flare thing (DONE)
+	comments (DONE)
+	set default material?
 make fun scenes

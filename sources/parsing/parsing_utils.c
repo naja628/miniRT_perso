@@ -59,7 +59,7 @@ char	*ft_strnstr(const char	*big, const char *little, size_t len)
 
 char	*skip_spaces(char *line)
 {
-	while (*line == ' ')
+	while (*line == ' ' || *line == '\t')
 		line++;
 	return (line);
 }

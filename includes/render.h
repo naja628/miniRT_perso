@@ -14,7 +14,7 @@ typedef struct s_light
 	t_vec	pos;
 	float	intensity;
 	t_vec	color;
-// 	int		no_flare;
+	int		no_flare;
 }	t_light;
 
 typedef struct s_light_list

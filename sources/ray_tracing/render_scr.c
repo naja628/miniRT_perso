@@ -5,11 +5,12 @@
 #include "scr.h"
 #include "render.h"
 #include "color.h"
+#include "utypes.h"
 
 // if the camera "virtual" screen corresponds to 'scr'
 // find the coordinates of pixel x, y on the virtual screen
 // (as t_vec2)
-static t_vec2	ft_pix_center(int x, int y, t_camera *cam, t_scr *scr)
+static t_vec2	ft_pix_center(int x, int y, t_scr *scr)
 {
 	t_vec2	ret;
 
@@ -64,8 +65,8 @@ static t_vec	ft_avg_samples(int n, t_vec2 *smp, t_camera *cam, t_scene *sce)
 
 void	ft_render_scr(t_scr *scr, t_camera *cam, t_scene *sce)
 {
-	int		x;
-	int		y;
+	t_uint		x;
+	t_uint		y;
 	int		color;
 	t_vec2	smp[4];
 
@@ -75,7 +76,7 @@ void	ft_render_scr(t_scr *scr, t_camera *cam, t_scene *sce)
 	{
 		while (y < scr->h)
 		{
-			ft_scatter4(smp, ft_pix_center(x, y, cam, scr), 0.5 / (scr->w - 1));
+			ft_scatter4(smp, ft_pix_center(x, y, scr), 0.5 / (scr->w - 1));
 			// gamma?
 			color = ft_vrgb_to_int(ft_avg_samples(4, smp, cam, sce));
 			ft_pixel_to_scr(scr, x, y, color);

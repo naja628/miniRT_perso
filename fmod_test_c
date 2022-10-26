@@ -1,9 +1,0 @@
-
-#include <math.h>
-#include <stdio.h>
-
-
-int main(int ac, char **av)
-{
-	printf("-5.5 2 : %f, -5.5 -2: %f\n", fmod(-5.5, 2), fmod(-5.5, -2));
-}

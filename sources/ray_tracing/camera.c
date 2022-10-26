@@ -31,7 +31,6 @@ void	ft_mk_camscreen(t_camera *c, float ratio)
 {
 	float		d;
 	float		fov;
-	const float	eps = 0.001;
 
 	fov = M_PI * c->fov_deg / 180;
 	d = 1 / (2 * tan(fov / 2));

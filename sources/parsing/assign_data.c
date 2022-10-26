@@ -99,6 +99,7 @@ int	read_bonus(char *line, t_shape_list *new, void *mlx)
 		new->shape.bump_map = map;
 		printf("rb2\n");
 	}
+	free(file_name);
 	//mlx has to arrive here ^
 	return (0);
 }
@@ -177,6 +178,7 @@ void	read_light(t_parse *intel, char *line)
 		error_handler(0);
 	new->next = intel->scene.lights;
 	intel->scene.lights = new;
+	new->light.no_flare = 0;
 	line = skip_spaces(line);
 	new->light.pos = read_vec(&line, &(intel->error));
 	line = skip_spaces(line);
@@ -185,6 +187,10 @@ void	read_light(t_parse *intel, char *line)
 		intel->error = 3;
 	line = skip_spaces(line);
 	new->light.color = read_color(&line, &(intel->error));
+	line = skip_spaces(line);
+	new->light.no_flare = ft_atoi_minirt(&line);
+	if (new->light.no_flare != 1 && new->light.no_flare != 0)
+		intel->error = 3;
 	if (eol_checker(&line) != 0)
 		error_handler(3);
 }

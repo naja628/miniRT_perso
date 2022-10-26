@@ -39,7 +39,6 @@ t_vec2	ft_pl_map(t_vec p, void *pl_data, t_basis *basis)
 	t_vec		v;
 	t_vec2		xy;
 	t_plane		*pl;
-	const float	eps = 0.001;
 
 	pl = (t_plane *) pl_data;
 	// TODO decide if store basis

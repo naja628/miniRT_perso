@@ -27,8 +27,8 @@ t_vec	ft_flare(t_hit *hit, t_line *ray, t_light *light)
 	 * computationally expensive
 	 * other solution: make it possible for the user to make certain lights 
 	 * not have flares (better I think?) */
-// 	if (light->no_flare)
-// 		return (ft_vec(0,0,0));
+	if (light->no_flare)
+		return (ft_vec(0,0,0));
 	to_light = ft_diff(light->pos, ray->p);
 	if (!hit || (ft_sqnorm(to_light) < ft_sqnorm(ft_diff(hit->p, ray->p))))
 	{

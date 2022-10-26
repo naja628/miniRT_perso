@@ -35,6 +35,7 @@
 # define PLANE "pl"
 # define CYLINDER "cy"
 # define CONE "cn"
+# define COMMENT "//"
 
 /*	id		name				extensions
 	A		ambiant light		ambiant + colors

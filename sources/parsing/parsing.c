@@ -45,7 +45,7 @@ void	read_intel(char *av, t_parse *intel)
 	close(intel->fd);
 	if (exit_code == 1)
 		exit(EXIT_FAILURE);
-	return (intel);
+	return ;
 }
 
 int	check_extension(char *file)

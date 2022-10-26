@@ -1,2 +1,0 @@
-todo check no segfault when camera or plane point parallel to up
-maybe bug when we can see the poles of bump-mapped spheres (div by 0)

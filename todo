@@ -1,18 +1,20 @@
-test etc:
-* norminette main funs
-* retest with bump_mapping and spheres
-* test Makefile
+* NOT DONE *
+is bump mapping on the cone the wrong way around (???) 
+maybe don't render the cone vertex to avoid ugly white pixel
+parsing : 
+	set default material?
+norminette
+progress info / logging
+make fun scene + sh template
 
-distance thingy:
-* in the bonus : maybe do use distance but use distance at 100% light instead of intensity
-* specular highlights and flares should probs depend on the intensity
-
-******* OLD ********* (probs no longer relevant but kept "to be safe")
-
-* gamma correction (DONE, does it really make it better??)
-
-extra bonus:
-* memoize stuff
-* carve out surface via images ( probs won't do)
-* occlusion shadows? (hard : won't do)
-
+* DONE *
+bump mapping reflection thing (DONE)
+bump mapping shadow thing (DONE)
+checkrering accounts for color (DONE)
+optional flares (DONE)
+compile with warnings (DONE)
+parsing:	
+	tabs (DONE)
+	free xpm name (DONE)
+	flare thing (DONE)
+	comments (DONE)
