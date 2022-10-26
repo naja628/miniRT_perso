@@ -41,13 +41,8 @@ t_vec	ft_color(t_vec p, t_shape *s)
 	xy = ft_map2d(p, s, NULL);
 	test = (ft_fmod(xy.x, 2 * tile_sz) - tile_sz);
 	test *= (ft_fmod(xy.y, 2 * tile_sz) - tile_sz);
-	// TODO maybe use super-dark grey / super light-white instead of 
-	// black / white
-	// or even super-dark grey / color
 	if (test > 0)
-// 		return (ft_vec(1, 1, 1));
 		return (s->color);
 	else
 		return (ft_scaled(0.3, s->color));
-// 		return (ft_vec(0, 0, 0));
 }

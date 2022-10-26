@@ -11,7 +11,6 @@ void	ft_free_shapes(t_shape_list *shapes)
 	{
 		ft_free_shapes(shapes->next);
 		free(shapes->shape.data);
-		// TODO is the list the handler of the bump_maps?
 		if (shapes->shape.bump_map)
 		{
 			free(shapes->shape.bump_map->data);

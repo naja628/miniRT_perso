@@ -13,7 +13,6 @@ static t_vec	ft_get_perturb(t_vec2 xy, float map_height, t_normals *bumps)
 	xy.y = ft_fmod(xy.y, map_height);
 	x = (int) floor(xy.x / map_height * bumps->w);
 	y = (int) floor(xy.y / map_height * bumps->h);
-	// make double-sure no segfault
 	x %= bumps->w;
 	y %= bumps->h;
 	return (bumps->data[x + y * bumps->w]);
@@ -31,7 +30,7 @@ t_vec	ft_bumped_normal(t_vec p, t_shape *s)
 		return (ft_normal(p, s));
 	xy = ft_map2d(p, s, &basis);
 	normal = ft_get_perturb(xy, s->map_height, s->bump_map);
-	if (s->type == SHP_SPHERE && (xy.x == 0)) // xy.x == 0 -> would div 0
+	if (s->type == SHP_SPHERE && (xy.x == 0))
 	{
 		poly.sp = s->data;
 		normal.x /= sin(xy.y / poly.sp->radius);

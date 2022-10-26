@@ -35,7 +35,8 @@
 # define PLANE "pl"
 # define CYLINDER "cy"
 # define CONE "cn"
-# define COMMENT "//"
+# define COMMENT "#"
+// use '#' instead of '//' as comment out symbol bc norminette dislikes '//' 
 
 /*	id		name				extensions
 	A		ambiant light		ambiant + colors

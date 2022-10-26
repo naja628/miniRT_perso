@@ -65,8 +65,8 @@ static t_vec	ft_avg_samples(int n, t_vec2 *smp, t_camera *cam, t_scene *sce)
 
 void	ft_render_scr(t_scr *scr, t_camera *cam, t_scene *sce)
 {
-	t_uint		x;
-	t_uint		y;
+	t_uint	x;
+	t_uint	y;
 	int		color;
 	t_vec2	smp[4];
 

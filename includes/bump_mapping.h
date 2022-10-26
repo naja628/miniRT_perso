@@ -1,7 +1,6 @@
 #ifndef BUMP_MAPPING_H
 # define BUMP_MAPPING_H
 
-
 typedef struct s_imdata
 {
 	int		w;

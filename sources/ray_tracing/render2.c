@@ -28,7 +28,7 @@ t_vec	ft_flare(t_hit *hit, t_line *ray, t_light *light)
 	 * other solution: make it possible for the user to make certain lights 
 	 * not have flares (better I think?) */
 	if (light->no_flare)
-		return (ft_vec(0,0,0));
+		return (ft_vec(0, 0, 0));
 	to_light = ft_diff(light->pos, ray->p);
 	if (!hit || (ft_sqnorm(to_light) < ft_sqnorm(ft_diff(hit->p, ray->p))))
 	{
@@ -87,7 +87,7 @@ int	ft_shadowed(t_hit *hit, t_line *ray, t_scene *scene, t_light *light)
 	shadow_ray.p = ft_vec_add(hit->p, ft_scaled(0.01, shadow_ray.dir));
 	true_n = ft_normal(hit->p, hit->sh);
 	if ((ft_dot(hit->n, shadow_ray.dir) * ft_dot(hit->n, ray->dir) > 0)
-			|| (ft_dot(true_n, shadow_ray.dir) * ft_dot(true_n, ray->dir) > 0))
+		|| (ft_dot(true_n, shadow_ray.dir) * ft_dot(true_n, ray->dir) > 0))
 		return (1);
 	it = scene->shapes;
 	while (it)

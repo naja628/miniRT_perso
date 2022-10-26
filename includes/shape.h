@@ -43,9 +43,9 @@ typedef struct s_shape
 // via hardcoding an array of functions that are the shape-specific
 // implementation and calling the right one based on the shape's 'type'. 
 // they must thus be of the relevant type (cf typedefs below)
-typedef int		(*t_intersect_fun)(float *, t_line *, void *);
-typedef t_vec	(*t_normal_fun)(t_vec, void *);
-typedef t_vec2	(*t_map2d)(t_vec, void *, t_basis *);
+typedef int				(*t_intersect_fun)(float *, t_line *, void *);
+typedef t_vec			(*t_normal_fun)(t_vec, void *);
+typedef t_vec2			(*t_map2d)(t_vec, void *, t_basis *);
 
 // functions on shapes that are often dispatchers to the specific
 // implementations for each shape.
@@ -67,12 +67,12 @@ t_vec	ft_normal(t_vec p, t_shape *s);
 // in .h bc of norminette, should be considered opaque
 //
 // forward declare below types:
-typedef struct s_sphere t_sphere;
-typedef struct s_cone t_cone;
+typedef struct s_sphere	t_sphere;
+typedef struct s_cone	t_cone;
 typedef union u_sp_cn
 {
-	t_sphere *sp;
-	t_cone	 *cn;
+	t_sphere	*sp;
+	t_cone		*cn;
 }	t_sp_cn;
 
 // When using bump mapping, returns the normal accounting 
@@ -152,10 +152,10 @@ t_vec2	ft_cy_map(t_vec p, void *cy_data, t_basis *basis);
 //cn
 typedef struct s_cone
 {
-	t_vec p;
-	t_vec dir;
-	float slope;
-	float h;
+	t_vec	p;
+	t_vec	dir;
+	float	slope;
+	float	h;
 }	t_cone;
 
 // implementation specific struct
@@ -168,9 +168,8 @@ typedef struct s_cncomp
 	float	height;
 	float	a;
 	float	b;
-	float 	c;
+	float	c;
 }	t_cncomp;
-
 
 int		ft_cn_inter(float *t, t_line *ray, void *cn_data);
 t_vec	ft_cn_normal(t_vec p, void *cn_data);

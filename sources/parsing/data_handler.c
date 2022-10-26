@@ -47,7 +47,7 @@ int	read_id(t_parse *intel)
 		read_shape(intel, (intel->line + 2), read_plane, SHP_PLANE);
 	else if (id_match(intel->line, CONE, 2))
 		read_shape(intel, (intel->line + 2), read_cone, SHP_CONE);
-	else if (!(ft_strncmp(intel->line, COMMENT, 2) == 0))
+	else if (!(ft_strncmp(intel->line, COMMENT, 1) == 0))
 		return (1);
 	return (0);
 }
