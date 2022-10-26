@@ -6,7 +6,7 @@
 /*   By: xle-boul <xle-boul@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 22:28:22 by xle-boul          #+#    #+#             */
-/*   Updated: 2022/10/26 21:27:49 by xle-boul         ###   ########.fr       */
+/*   Updated: 2022/10/26 23:14:05 by xle-boul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	file_name_length(char *line)
 	return (count);
 }
 
-int	check_xpm(char *file_name)
+int	check_xpm(char *file_name, int *ret)
 {
 	if (ft_strnstr(file_name, ".xpm", ft_strlen(file_name)) == NULL)
 		return (1);
@@ -54,41 +54,43 @@ int	check_xpm(char *file_name)
 		|| file_name[ft_strlen(file_name) - 2] != 'p'
 		|| file_name[ft_strlen(file_name) - 3] != 'x'
 		|| file_name[ft_strlen(file_name) - 4] != '.')
+	{
+		*ret = WRONG_VALUE;
 		return (1);
+	}
 	return (0);
 }
 
 
 // check if value of the 3 coefs <= 1
 
-int	read_bonus(char *line, t_shape_list *new, void *mlx)
+void	read_bonus(char *line, t_shape_list *new, void *mlx, int *ret)
 {
 	char		*file_name;
 	t_normals	*map;
 
 	line = skip_spaces(line);
-	new->shape.dif_coef = ft_atof_minirt(&line);
+	new->shape.dif_coef = ft_atof_minirt(&line, ret);
 	line = skip_spaces(line);
-	new->shape.spec_coef = ft_atof_minirt(&line);
+	new->shape.spec_coef = ft_atof_minirt(&line, ret);
 	line = skip_spaces(line);
-	new->shape.refl_coef = ft_atof_minirt(&line);
+	new->shape.refl_coef = ft_atof_minirt(&line, ret);
 	line = skip_spaces(line);
-	new->shape.is_checkered = ft_atoi_minirt(&line);
+	new->shape.is_checkered = ft_atoi_minirt(&line, ret);
 	if (eol_checker(&line) == 0)
-		return (0);
+		return ;
 	map = malloc(sizeof(t_normals));
 	if (!map)
 		error_handler(MALLOC_ERR);
 	file_name = copy_xpm(&line, file_name_length(line));
 	line = skip_spaces(line);
-	new->shape.map_height = ft_atof_minirt(&line);
-	if (check_xpm(file_name) == 0)
+	new->shape.map_height = ft_atof_minirt(&line, ret);
+	if (check_xpm(file_name, ret) == 0)
 	{
 		ft_xpm_to_normals(mlx, map, file_name, 0.05);
 		new->shape.bump_map = map;
 	}
 	free(file_name);
-	return (0);
 }
 
 // int	read_bonus(char *line, t_shape_list *new, void *mlx)
@@ -104,7 +106,7 @@ int	read_bonus(char *line, t_shape_list *new, void *mlx)
 // 	line = skip_spaces(line);
 // 	new->shape.refl_coef = ft_atof_minirt(&line);
 // 	line = skip_spaces(line);
-// 	new->shape.is_checkered = ft_atoi_minirt(&line);
+// 	new->shape.is_checkered = ft_atoi_minirt(&line, &ret);
 // 	if (eol_checker(&line) == 0)
 // 		return (0);
 // 	printf("rb0\n");

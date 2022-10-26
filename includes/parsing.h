@@ -6,7 +6,7 @@
 /*   By: xle-boul <xle-boul@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 21:17:35 by xle-boul          #+#    #+#             */
-/*   Updated: 2022/10/26 21:46:45 by xle-boul         ###   ########.fr       */
+/*   Updated: 2022/10/26 23:27:33 by xle-boul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ typedef struct s_parse
 	int			num_ambients;
 }				t_parse;
 
-typedef void	*(*t_read)(t_parse *, char **);
+typedef void	*(*t_read)(t_parse *, char **, int *);
 
 // error handling
 
@@ -78,8 +78,8 @@ size_t	ft_strlen(const char *s);
 char	*ft_strnstr(const char	*big, const char *little, size_t len);
 char	**ft_split(char const *s, char c);
 char	*skip_spaces(char *line);
-int		ft_atoi_minirt(char **str);
-float	ft_atof_minirt(char **str);
+int		ft_atoi_minirt(char **str, int *ret);
+float	ft_atof_minirt(char **str, int *ret);
 
 // parsing
 
@@ -92,15 +92,15 @@ void	init_intel(t_parse *intel);
 
 int		read_id(t_parse *intel);
 void	assign_intel(t_parse *intel, char **in_line);
-void	*read_plane(t_parse *intel, char **line);
-void	*read_cylinder(t_parse *intel, char **line);
-void	*read_sphere(t_parse *intel, char **line);
-void	*read_cone(t_parse *intel, char **line);
-void	read_shape(t_parse *intel, char *line, t_read fun, t_shapetype type);
+void	*read_plane(t_parse *intel, char **line, int *ret);
+void	*read_cylinder(t_parse *intel, char **line, int *ret);
+void	*read_sphere(t_parse *intel, char **line, int *ret);
+void	*read_cone(t_parse *intel, char **line, int *ret);
+int		read_shape(t_parse *intel, char *line, t_read fun, t_shapetype type);
 int		read_light(t_parse *intel, char *line);
 int		read_camera(t_parse *intel, char *line);
 int		read_ambient_light(t_parse *intel, char *line);
-int		read_bonus(char *line, t_shape_list *new, void *mlx);
+void	read_bonus(char *line, t_shape_list *new, void *mlx, int *ret);
 
 // data utilities
 
