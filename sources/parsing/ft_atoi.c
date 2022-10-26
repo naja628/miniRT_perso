@@ -12,9 +12,7 @@
 
 // #include "parsing.h"
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
+#include "parsing.h"
 #define LL_MAX 9223372036854775807
 
 typedef struct s_atoi
@@ -55,13 +53,18 @@ typedef struct s_atof
 // 	return ((char *)str);
 // }
 
-int	ft_atoi_minirt(char **str)
+int	ft_atoi_minirt(char **str, int *ret)
 {
 	t_atoi	n;
 
 	n.lln = 0;
 	n.i = 1;
 	n.str_bis = *str;
+	if (!(*n.str_bis != '-') && !(48 <= *n.str_bis && *n.str_bis <= 57))
+	{
+		*ret = WRONG_VALUE;
+		return (0);
+	}
 	if (*n.str_bis == '-')
 	{
 		n.i = -1;
@@ -84,7 +87,7 @@ int	ft_atoi_minirt(char **str)
 	return ((int)n.lln * n.i);
 }
 
-float	ft_atof_minirt(char **str)
+float	ft_atof_minirt(char **str, int *ret)
 {
 	t_atoi	n;
 	float	k;
@@ -94,6 +97,12 @@ float	ft_atof_minirt(char **str)
 	n.i = 1;
 	decimal = 1;
 	n.str_bis = (char *)*str;
+	if (!(*n.str_bis == '-') && !(48 <= *n.str_bis && *n.str_bis <= 57))
+	{
+		*ret = WRONG_VALUE;
+		printf("test success\n");
+		return (0);
+	}
 	if (*n.str_bis == '-')
 	{
 		n.i = -1;
