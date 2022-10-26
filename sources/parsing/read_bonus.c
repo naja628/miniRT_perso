@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   read_data_bonus.c                                  :+:      :+:    :+:   */
+/*   read_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: xle-boul <xle-boul@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 22:28:22 by xle-boul          #+#    #+#             */
-/*   Updated: 2022/10/25 22:28:52 by xle-boul         ###   ########.fr       */
+/*   Updated: 2022/10/26 21:27:49 by xle-boul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,9 @@ int	check_xpm(char *file_name)
 		return (1);
 	return (0);
 }
+
+
+// check if value of the 3 coefs <= 1
 
 int	read_bonus(char *line, t_shape_list *new, void *mlx)
 {

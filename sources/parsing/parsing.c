@@ -6,7 +6,7 @@
 /*   By: xle-boul <xle-boul@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 21:17:08 by xle-boul          #+#    #+#             */
-/*   Updated: 2022/10/25 21:03:20 by xle-boul         ###   ########.fr       */
+/*   Updated: 2022/10/26 21:12:28 by xle-boul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void	init_intel(t_parse *intel)
 	intel->error = 0;
 	intel->scene.lights = NULL;
 	intel->scene.shapes = NULL;
+	intel->num_ambients = 0;
+	intel->num_cameras = 0;
 }
 
 void	read_intel(char *av, t_parse *intel)
