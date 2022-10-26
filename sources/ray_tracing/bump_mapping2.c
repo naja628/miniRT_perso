@@ -8,14 +8,14 @@ static float	ft_hdiff(t_uint from, t_uint to, float max_height)
 {
 	int	diff;
 
-	// (TODO think)
-	// I think doing this way is ok regardless of endianness
-	// but it kinda depends if blue is always the least
-	// significant bits or if the X-server encoding
-	// endianness is independant from the machines 
-	// may use (green or red) to be safer
-	// (they are supposed to be the same and green will become 
-	// red when endianness changes)
+	/* (TODO think)
+	*  I think doing this way is ok regardless of endianness
+	*  but it kinda depends if blue is always the least
+	*  significant bits or if the X-server encoding
+	*  endianness is independant from the machines 
+	*  may use (green or red) to be safer
+	*  (they are supposed to be the same and green will become 
+	*  red when endianness changes) */
 	from = 0xff & from;
 	to = 0xff & to;
 	diff = to - from;
@@ -45,8 +45,8 @@ void	ft_mk_normal_map(t_normals *map, t_imdata *h, float maxh)
 	t_vec	tl_br;
 	float	hdiff;
 
-	maxh *= map->h;
 	ft_init_map(map, h);
+	maxh *= map->h;
 	if (!map->data)
 		return ;
 	y = 0;

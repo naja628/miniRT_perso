@@ -59,7 +59,6 @@ t_vec2	ft_cy_map(t_vec p, void *cy_data, t_basis *basis)
 	ft_scale(1.0 / cy->r, &perp);
 	if (basis)
 		ft_complete_basis2(perp, ft_scaled(-1, cy->dir), basis);
-	// TODO decide if store angle-zero
 	if (!ft_colin(cy->dir, ft_vec(1, 0, 0)))
 		angle_zero = ft_cross(ft_vec(1, 0, 0), cy->dir);
 	else

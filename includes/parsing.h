@@ -35,6 +35,8 @@
 # define PLANE "pl"
 # define CYLINDER "cy"
 # define CONE "cn"
+# define COMMENT "#"
+// use '#' instead of '//' as comment out symbol bc norminette dislikes '//' 
 
 # define MALLOC_ERR 0
 # define FILE_EXT_ERR 1
@@ -95,7 +97,7 @@ void	read_shape(t_parse *intel, char *line, t_read fun, t_shapetype type);
 void	read_light(t_parse *intel, char *line);
 void	read_camera(t_parse *intel, char *line);
 void	read_ambient_light(t_parse *intel, char *line);
-int		read_bonus(char *line, t_shape_list *new, void *mlx, int *error);
+int		read_bonus(char *line, t_shape_list *new, void *mlx);
 
 // data utilities
 

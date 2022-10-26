@@ -39,7 +39,6 @@ static int	ft_handle_poles(t_vec2 xy, t_basis *basis, t_vec unit)
 {
 	if (ft_near_zero(xy.y, 0.001) || ft_near_zero(xy.y - M_PI, 0.001))
 	{
-		xy.x = 0;
 		if (basis)
 			ft_complete_basis2(unit, ft_vec(0, -1, 0), basis);
 		return (1);
@@ -66,6 +65,8 @@ t_vec2	ft_sp_map(t_vec p, void *sp_data, t_basis *basis)
 		ft_make_unit(&unit);
 		xy.x = ft_angle(ft_vec(0, -1, 0), unit);
 	}
+	else
+		xy.x = 0;
 	if (unit.x < 0)
 		xy.x = 2 * M_PI - xy.x;
 	xy.x *= sp->radius;

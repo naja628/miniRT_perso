@@ -30,9 +30,9 @@ void	ft_pixel_to_scr(t_scr *scr, int x, int y, int rgb)
 	int		cur_byte;
 
 	data = (t_uint *) scr->data;
+	native_rgb = mlx_get_color_value(scr->mlx, rgb);
 	if (scr->bits == 32)
 	{
-		native_rgb = mlx_get_color_value(scr->mlx, rgb);
 		data[x + y * scr->line_sz / sizeof(t_uint)] = native_rgb;
 		return ;
 	}

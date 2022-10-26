@@ -64,7 +64,7 @@ all: $(NAME)
 
 $(NAME): $(LIB) $(OBJ_FILES)
 	@printf "$(YELLOW)Linking miniRT...\n\n$(END)"
-	$(CC) $(OBJ_FILES) -o $@ $(INCLUDES) $(EXTRA_FLAGS) -lm
+	$(CC) $(CFALGS) $(OBJ_FILES) -o $@ $(INCLUDES) $(EXTRA_FLAGS) -lm
 	@printf "\n$(GREEN)miniRT compiled.\n$(END)"
 #ifeq ($(OS),Linux)
 #	@printf "$(YELLOW)Linking miniRT...\n\n$(END)"
@@ -80,7 +80,7 @@ $(NAME): $(LIB) $(OBJ_FILES)
 $(OBJ_DIR)/%.o : %.c
 	@$(MKDIR) $(OBJ_DIR)
 	@printf "$(YELLOW)Compiling object:\n$(END)"
-	$(CC) $(INCLUDES) $(D_OS) -Imlx -c -o $@ $<
+	$(CC) $(CFLAGS) $(INCLUDES) $(D_OS) -Imlx -c -o $@ $<
 	@printf "$(GREEN)Object $(UNDERLINE)$(WHITE)$(notdir $@)$(END)$(GREEN) successfully compiled\n\n$(END)"
 
 $(LIB):

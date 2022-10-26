@@ -38,7 +38,7 @@ void	read_shape(t_parse *intel, char *line, t_read fun, t_shapetype type)
 	new->shape.color = read_color(&line, &(intel->error));
 	default_shape(&(new->shape));
 	if (eol_checker(&line) != 0)
-		read_bonus(line, new, intel->mlx, intel->error);
+		read_bonus(line, new, intel->mlx);
 	if (eol_checker(&line) != 0)
 		intel->error = 2;
 }

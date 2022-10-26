@@ -24,7 +24,6 @@ void	read_intel(char *av, t_parse *intel)
 {
 	int		exit_code;
 
-	init_intel(intel);
 	exit_code = 0;
 	intel->fd = open(av, O_RDONLY);
 	if (intel->fd == -1)

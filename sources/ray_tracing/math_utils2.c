@@ -2,8 +2,6 @@
 
 float	ft_fastexp(float x, int pow)
 {
-	float	step;
-
 	if (pow == 0)
 		return (1);
 	if (pow % 2 == 1)

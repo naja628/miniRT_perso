@@ -58,7 +58,7 @@ int	check_xpm(char *file_name)
 	return (0);
 }
 
-int	read_bonus(char *line, t_shape_list *new, void *mlx, int *error)
+int	read_bonus(char *line, t_shape_list *new, void *mlx)
 {
 	char		*file_name;
 	t_normals	*map;
@@ -84,5 +84,44 @@ int	read_bonus(char *line, t_shape_list *new, void *mlx, int *error)
 		ft_xpm_to_normals(mlx, map, file_name, 0.05);
 		new->shape.bump_map = map;
 	}
+	free(file_name);
 	return (0);
 }
+
+// int	read_bonus(char *line, t_shape_list *new, void *mlx)
+// {
+// 	char		*file_name;
+// 	t_normals	*map;
+// 
+// 	line = skip_spaces(line);
+// 	new->shape.dif_coef = ft_atof_minirt(&line);
+// 	printf("shape %f\n", new->shape.dif_coef);
+// 	line = skip_spaces(line);
+// 	new->shape.spec_coef = ft_atof_minirt(&line);
+// 	line = skip_spaces(line);
+// 	new->shape.refl_coef = ft_atof_minirt(&line);
+// 	line = skip_spaces(line);
+// 	new->shape.is_checkered = ft_atoi_minirt(&line);
+// 	if (eol_checker(&line) == 0)
+// 		return (0);
+// 	printf("rb0\n");
+// 	map = malloc(sizeof(t_normals));
+// 	if (!map)
+// 		error_handler(0);
+// 	printf("map %p\n", map);
+// 	file_name = copy_xpm(&line, file_name_length(line));
+// 	printf("file name = _%s_\n", file_name);
+// 	line = skip_spaces(line);
+// 	new->shape.map_height = ft_atof_minirt(&line);
+// 	if (check_xpm(file_name) == 0)
+// 	{
+// 		printf("rb1\n");
+// 		// printf("scanned correctly\n");
+// 		printf("err %d", ft_xpm_to_normals(mlx, map, file_name, 0.05));
+// 		new->shape.bump_map = map;
+// 		printf("rb2\n");
+// 	}
+// 	free(file_name);
+// 	//mlx has to arrive here ^
+// 	return (0);
+// }

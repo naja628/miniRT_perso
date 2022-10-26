@@ -34,25 +34,26 @@ typedef struct s_atof
 }				t_atof;
 /* converts a string to corresponding integer */
 
-static char	*ft_trim_string(const char *str, t_atoi *n)
-{
-	n->sign = 0;
-	n->i = 1;
-	if (!str)
-		return (0);
-	while (*str == '\t' || *str == '\n' || *str == '\v'
-		|| *str == '\r' || *str == '\f' || *str == ' ')
-		str++;
-	while (*str == '-' || *str == '+')
-	{
-		if (*str == '-')
-			n->sign++;
-		str++;
-	}
-	if (n->sign % 2 != 0)
-		n->i = -1;
-	return ((char *)str);
-}
+// commented out : Compile with warnings (TODO do we need it or delete)
+// static char	*ft_trim_string(const char *str, t_atoi *n)
+// {
+// 	n->sign = 0;
+// 	n->i = 1;
+// 	if (!str)
+// 		return (0);
+// 	while (*str == '\t' || *str == '\n' || *str == '\v'
+// 		|| *str == '\r' || *str == '\f' || *str == ' ')
+// 		str++;
+// 	while (*str == '-' || *str == '+')
+// 	{
+// 		if (*str == '-')
+// 			n->sign++;
+// 		str++;
+// 	}
+// 	if (n->sign % 2 != 0)
+// 		n->i = -1;
+// 	return ((char *)str);
+// }
 
 int	ft_atoi_minirt(char **str)
 {

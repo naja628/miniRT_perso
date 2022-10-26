@@ -40,6 +40,27 @@ void	read_camera(t_parse *intel, char *line)
 		intel->error = 2;
 }
 
+// void	read_light(t_parse *intel, char *line)
+// {
+// 	t_light_list	*new;
+// 
+// 	new = malloc(sizeof(t_light_list));
+// 	if (!new)
+// 		error_handler(0);
+// 	new->next = intel->scene.lights;
+// 	intel->scene.lights = new;
+// 	line = skip_spaces(line);
+// 	new->light.pos = read_vec(&line, &(intel->error));
+// 	line = skip_spaces(line);
+// 	new->light.intensity = ft_atof_minirt(&line);
+// 	if (0.0 <= new->light.intensity && new->light.intensity <= 1.0)
+// 		intel->error = 3;
+// 	line = skip_spaces(line);
+// 	new->light.color = read_color(&line, &(intel->error));
+// 	if (eol_checker(&line) != 0)
+// 		intel->error = 2;
+// }
+
 void	read_light(t_parse *intel, char *line)
 {
 	t_light_list	*new;
@@ -49,6 +70,7 @@ void	read_light(t_parse *intel, char *line)
 		error_handler(0);
 	new->next = intel->scene.lights;
 	intel->scene.lights = new;
+	new->light.no_flare = 0;
 	line = skip_spaces(line);
 	new->light.pos = read_vec(&line, &(intel->error));
 	line = skip_spaces(line);
@@ -57,6 +79,10 @@ void	read_light(t_parse *intel, char *line)
 		intel->error = 3;
 	line = skip_spaces(line);
 	new->light.color = read_color(&line, &(intel->error));
+	line = skip_spaces(line);
+	new->light.no_flare = ft_atoi_minirt(&line);
+	if (new->light.no_flare != 1 && new->light.no_flare != 0)
+		intel->error = 3;
 	if (eol_checker(&line) != 0)
 		intel->error = 2;
 }

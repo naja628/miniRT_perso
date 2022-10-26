@@ -29,6 +29,7 @@ int	error_handler(int error)
 
 int	error_handler_free(int error, char **in_line, t_parse *intel)
 {
+	(void) intel; // compile with warnings (TODO why did we need it?)
 	if (error == 0)
 		printf("Error!\nMachin qui free\n");
 	else if (error == 1)
