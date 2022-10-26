@@ -69,7 +69,7 @@ static void	ft_cn_basis(t_vec p, void *cn_data, t_basis *basis)
 
 	cn = (t_cone *) cn_data;
 	normal = ft_cn_normal(p, cn_data);
-	y_dir = p - cn->p;
+	y_dir = ft_diff(p,cn->p);
 	ft_make_unit(&y_dir);
 	ft_complete_basis2(normal, y_dir, basis);
 }

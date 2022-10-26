@@ -1,0 +1,12 @@
+bump mapping reflection thing (DONE)
+bump mapping shadow thing (DONE)
+checkrering accounts for color (DONE)
+optional flares (DONE as comments. needs parsing modif)
+parsing :
+	tabs
+	flare thing
+	comments
+	set default material?
+compile with warnings
+norminette
+make fun scenes

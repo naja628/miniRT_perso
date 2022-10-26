@@ -14,41 +14,12 @@ int	ft_intersect(float *t, t_line *ray, t_shape *s)
 	return (funs[s->type](t, ray, s->data));
 }
 
-static t_vec	ft_get_perturb(t_vec2 xy, float map_height, t_normals *bumps)
-{
-	int	x;
-	int	y;
-
-	xy.x = ft_fmod(xy.x, map_height);
-	xy.y = ft_fmod(xy.y, map_height);
-	x = (int) floor(xy.x / map_height * bumps->w);
-	y = (int) floor(xy.y / map_height * bumps->h);
-	return (bumps->data[x + y * bumps->w]);
-}
-
 t_vec	ft_normal(t_vec p, t_shape *s)
 {
 	const t_normal_fun	funs[SHP_NTYPES]
 		= {ft_sp_normal, ft_pl_normal, ft_cy_normal, ft_cn_normal};
-	t_vec				normal;
-	t_basis				basis;
-	t_vec2				xy;
 
-	if (!s->bump_map)
-		return (funs[s->type](p, s->data));
-	xy = ft_map2d(p, s, &basis);
-	normal = ft_get_perturb(xy, s->map_height, s->bump_map);
-	if (s->type == SHP_SPHERE && (xy.x == 0)) // xy.x == 0 -> would div 0
-	{
-		normal.x /= sin(xy.y / ((t_sphere *)(s->data))->radius);
-		ft_make_unit(&normal);
-	}
-	if (s->type == SHP_CYLIN && !(ft_near_zero(xy.y, 0.001)))
-	{
-		normal.x /= sqrt((t_cone *)(s->data)->slope);
-	}
-	normal = ft_in_basis(&basis, normal);
-	return (normal);
+	return (funs[s->type](p, s->data));
 }
 
 t_vec2	ft_map2d(t_vec p, t_shape *s, t_basis *basis)
@@ -74,7 +45,9 @@ t_vec	ft_color(t_vec p, t_shape *s)
 	// black / white
 	// or even super-dark grey / color
 	if (test > 0)
-		return (ft_vec(1, 1, 1));
+// 		return (ft_vec(1, 1, 1));
+		return (s->color);
 	else
-		return (ft_vec(0, 0, 0));
+		return (ft_scaled(0.3, s->color));
+// 		return (ft_vec(0, 0, 0));
 }

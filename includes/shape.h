@@ -61,10 +61,26 @@ int		ft_intersect(float *t, t_line *ray, t_shape *s);
 // given p a point approximately on the shape '*s'
 // return the normal to the surface of s at the point p
 // (points outwards)
-// !! If bump-mapping is enabled, this function breaks 
-// encapsulation, and some shape-specific code may need to 
-// be added to its implementation
 t_vec	ft_normal(t_vec p, t_shape *s);
+
+// implementation specific type used by `ft_bumped_normal`
+// in .h bc of norminette, should be considered opaque
+//
+// forward declare below types:
+typedef struct s_sphere t_sphere;
+typedef struct s_cone t_cone;
+typedef union u_sp_cn
+{
+	t_sphere *sp;
+	t_cone	 *cn;
+}	t_sp_cn;
+
+// When using bump mapping, returns the normal accounting 
+// for it. (return the normal otherwise)
+// !! this function breaks encapsulation,
+// it contains code needed to rescale the normals
+// depending on the way the surface is 2d mapped.
+t_vec	ft_bumped_normal(t_vec p, t_shape *s);
 
 // defines a map from the surface of s to 2d space
 // Associates to p the image via this map (returned as t_vec2)

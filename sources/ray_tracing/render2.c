@@ -27,6 +27,8 @@ t_vec	ft_flare(t_hit *hit, t_line *ray, t_light *light)
 	 * computationally expensive
 	 * other solution: make it possible for the user to make certain lights 
 	 * not have flares (better I think?) */
+// 	if (light->no_flare)
+// 		return (ft_vec(0,0,0));
 	to_light = ft_diff(light->pos, ray->p);
 	if (!hit || (ft_sqnorm(to_light) < ft_sqnorm(ft_diff(hit->p, ray->p))))
 	{
@@ -68,23 +70,24 @@ void	ft_make_hit(t_hit *hit, t_shape *shape, t_vec p)
 {
 	hit->p = p;
 	hit->sh = shape;
-	hit->n = ft_normal(p, shape);
+	hit->n = ft_bumped_normal(p, shape);
 }
 
 int	ft_shadowed(t_hit *hit, t_line *ray, t_scene *scene, t_light *light)
 {
-	int				shadow;
+	t_vec			true_n;
 	t_shape_list	*it;
 	t_line			shadow_ray;
 	float			t;
 	float			sq_dist;
 
-	shadow = 0;
 	shadow_ray.dir = ft_diff(light->pos, hit->p);
 	sq_dist = ft_sqnorm(shadow_ray.dir);
 	ft_make_unit(&shadow_ray.dir);
 	shadow_ray.p = ft_vec_add(hit->p, ft_scaled(0.01, shadow_ray.dir));
-	if (ft_dot(hit->n, shadow_ray.dir) * ft_dot(hit->n, ray->dir) > 0)
+	true_n = ft_normal(hit->p, hit->sh);
+	if ((ft_dot(hit->n, shadow_ray.dir) * ft_dot(hit->n, ray->dir) > 0)
+			|| (ft_dot(true_n, shadow_ray.dir) * ft_dot(true_n, ray->dir) > 0))
 		return (1);
 	it = scene->shapes;
 	while (it)
