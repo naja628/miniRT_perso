@@ -6,7 +6,7 @@
 /*   By: xle-boul <xle-boul@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 21:17:35 by xle-boul          #+#    #+#             */
-/*   Updated: 2022/10/25 22:29:50 by xle-boul         ###   ########.fr       */
+/*   Updated: 2022/10/26 21:46:45 by xle-boul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,19 @@
 # define COMMENT "#"
 // use '#' instead of '//' as comment out symbol bc norminette dislikes '//' 
 
+// Error codes in parsing
 # define MALLOC_ERR 0
 # define FILE_EXT_ERR 1
 # define READ_FILE_ERR 2
 # define INVALID_DATA_ERR 3
 # define ARGUMENTS_ERR 4
+
+
+// Error codes in read
+# define COMMA_SEP 1
+# define TRAILING_CHARS 2
+# define WRONG_VALUE 3
+# define DIR_NOT_UNIT 4
 
 typedef struct s_parse
 {
@@ -52,14 +60,9 @@ typedef struct s_parse
 	int			fd;
 	char		*line;
 	void		*mlx;
+	int			num_cameras;
+	int			num_ambients;
 }				t_parse;
-/*
-	error codes:
-					1: comma separator
-					2: unwanted chars at the end of line
-					3: invalid domain
-					4: dir not unit
-*/
 
 typedef void	*(*t_read)(t_parse *, char **);
 
@@ -94,9 +97,9 @@ void	*read_cylinder(t_parse *intel, char **line);
 void	*read_sphere(t_parse *intel, char **line);
 void	*read_cone(t_parse *intel, char **line);
 void	read_shape(t_parse *intel, char *line, t_read fun, t_shapetype type);
-void	read_light(t_parse *intel, char *line);
-void	read_camera(t_parse *intel, char *line);
-void	read_ambient_light(t_parse *intel, char *line);
+int		read_light(t_parse *intel, char *line);
+int		read_camera(t_parse *intel, char *line);
+int		read_ambient_light(t_parse *intel, char *line);
 int		read_bonus(char *line, t_shape_list *new, void *mlx);
 
 // data utilities

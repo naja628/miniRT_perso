@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   data_handler.c                                     :+:      :+:    :+:   */
+/*   read_data_hub.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: xle-boul <xle-boul@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 23:03:04 by xle-boul          #+#    #+#             */
-/*   Updated: 2022/10/25 21:28:50 by xle-boul         ###   ########.fr       */
+/*   Updated: 2022/10/26 21:25:15 by xle-boul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,19 +24,32 @@ static int id_match(char *linestart, char *id, size_t id_len)
 	char	after;
 	
 	after = linestart[id_len];
-	// maybe skip spaces here, depends if we want it to be legal
 	if (!ft_strncmp(linestart, id, id_len) && (after == ' ' || after == '\t'))
 		return (1);
 	else
 		return (0);
 }
 
+// gestion erreurs: int tous les read. return code d'erreur.
+// si code d'erreur, read_id return le code et on l'interprete dans read_intel
+// warnings:
+//	in bonus
+
+// fatal errors:
+//	in base version
+
 int	read_id(t_parse *intel)
 {
 	if (id_match(intel->line, AMBIENT_LIGHT, 1))
+	{
 		read_ambient_light(intel, (intel->line + 1));
+		intel->num_ambients++;
+	}
 	else if (id_match(intel->line, CAMERA, 1))
+	{
 		read_camera(intel, (intel->line + 1));
+		intel->num_cameras++;
+	}
 	else if (id_match(intel->line, LIGHT, 1))
 		read_light(intel, (intel->line + 1));
 	else if (id_match(intel->line, SPHERE, 2))
