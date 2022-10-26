@@ -61,13 +61,13 @@ static void	ft_cn_basis(t_vec p, void *cn_data, t_basis *basis)
 {
 	t_cone	*cn;
 	t_vec	normal;
-	t_vec	y_dir;
+	t_vec	neg_y_dir;
 
 	cn = (t_cone *) cn_data;
 	normal = ft_cn_normal(p, cn_data);
-	y_dir = ft_diff(p, cn->p);
-	ft_make_unit(&y_dir);
-	ft_complete_basis2(normal, y_dir, basis);
+	neg_y_dir = ft_scaled(-1, ft_diff(p, cn->p));
+	ft_make_unit(&neg_y_dir);
+	ft_complete_basis2(normal, neg_y_dir, basis);
 }
 
 // y goes to height, x goes to angle times radius

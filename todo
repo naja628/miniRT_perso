@@ -1,13 +1,12 @@
 * NOT DONE *
-is bump mapping on the cone the wrong way around (???) 
-maybe don't render the cone vertex to avoid ugly white pixel
 parsing : 
 	set default material?
-norminette
 progress info / logging
-make fun scene + sh template
+make fun scenes + sh template
 
 * DONE *
+is bump mapping on the cone the wrong way around? (DONE, it was) 
+norminette (DONE, except headers + few comments)
 bump mapping reflection thing (DONE)
 bump mapping shadow thing (DONE)
 checkrering accounts for color (DONE)
