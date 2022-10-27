@@ -6,7 +6,7 @@
 /*   By: xle-boul <xle-boul@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 17:44:45 by xle-boul          #+#    #+#             */
-/*   Updated: 2022/10/25 20:43:50 by xle-boul         ###   ########.fr       */
+/*   Updated: 2022/10/27 21:02:01 by xle-boul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ int	main(int ac, char **av)
 
 
 	if (ac != 2)
-		error_handler(0);
+		error_handler(MALLOC_ERR);
 	if (check_extension(av[1]) != 0)
-		error_handler(1);
+		error_handler(FILE_EXT_ERR);
 	ft_init_scr(&scr, 1000, 700, "miniRT");
 	init_intel(&intel);
 	intel.mlx = scr.mlx;
@@ -36,7 +36,7 @@ int	main(int ac, char **av)
 	mem.scr = &scr;
 	if (read_intel(av[1], &intel))
 		ft_quit(&mem);
-	print_all_data(intel); // DEBUG
+	// print_all_data(intel); // DEBUG
 
 	// hardcone same scene as test.rt
 // 	t_light_list lights = {{ft_vec(0, 0, 3), 0.7, ft_vec(1, 1, 1)}, NULL};

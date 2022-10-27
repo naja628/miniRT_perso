@@ -1,28 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   validate2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: xle-boul <xle-boul@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/26 20:24:32 by xle-boul          #+#    #+#             */
-/*   Updated: 2022/09/26 20:26:53 by xle-boul         ###   ########.fr       */
+/*   Created: 2022/10/27 23:01:56 by xle-boul          #+#    #+#             */
+/*   Updated: 2022/10/27 23:02:17 by xle-boul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-void	free_array_of_strings(char **in_line)
+int	want_coefs(t_shape *s, int *berr)
 {
-	int	i;
+	if (*berr)
+		return (*berr);
+	if (s->dif_coef < 0 || s->spec_coef < 0 || s->refl_coef < 0
+		|| s->dif_coef + s->spec_coef + s->refl_coef > 1.01)
+		*berr = WRONG_VALUE;
+	return (*berr);
+}
 
-	i = 0;
-	while (in_line[i] != NULL)
-		i++;
-	while (i >= 0)
-	{
-		free (in_line[i]);
-		i--;
-	}
-	free (in_line);
+int	want_bool(int boolean, int *berr)
+{
+	if (*berr)
+		return (*berr);
+	if (!(boolean == 0 || boolean == 1))
+		*berr = WRONG_VALUE;
+	return (*berr);
 }

@@ -6,7 +6,7 @@
 /*   By: xle-boul <xle-boul@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 21:58:43 by xle-boul          #+#    #+#             */
-/*   Updated: 2022/10/26 23:21:31 by xle-boul         ###   ########.fr       */
+/*   Updated: 2022/10/27 22:59:24 by xle-boul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,36 +39,12 @@ t_vec	read_vec(char **line, int *error)
 	return (vec);
 }
 
-// t_vec	read_color(char **line, int *error)
-// {
-// 	t_vec	color;
-// 	int		debug;
-// 
-// 	if (*error)
-// 		return (ft_vec(0,0,0));
-// 	debug = ft_atoi_minirt(line, error);
-// 	color.x = (float) debug / 255;
-// 	if (**line != ',')
-// 		*error = 1;
-// 	++(*line);
-// 	color.y = (float)ft_atoi_minirt(line, error) / 255;
-// 	if (**line != ',')
-// 		*error = 1;
-// 	++(*line);
-// 	color.z = (float)ft_atoi_minirt(line, error) / 255;
-// 	if ((0 <= color.x && color.x <= 1)
-// 		|| (0 <= color.y && color.y <= 1)
-// 		|| (0 <= color.z && color.z <= 1))
-// 		*error = WRONG_VALUE;
-// 	return (color);
-// }
-
 t_vec	read_color(char **line, int *error)
 {
 	t_vec	color;
 
 	if (*error)
-		return (ft_vec(0,0,0));
+		return (ft_vec(0, 0, 0));
 	color.x = ft_atoi_minirt(line, error);
 	skip_comma(line, error);
 	color.y = ft_atoi_minirt(line, error);
@@ -76,8 +52,8 @@ t_vec	read_color(char **line, int *error)
 	color.z = ft_atoi_minirt(line, error);
 	ft_scale(1.0 / 255, &color);
 	if (!((0 <= color.x && color.x <= 1)
-		&& (0 <= color.y && color.y <= 1)
-		&& (0 <= color.z && color.z <= 1)))
+			&& (0 <= color.y && color.y <= 1)
+			&& (0 <= color.z && color.z <= 1)))
 		set_if_zero(error, WRONG_VALUE);
 	return (color);
 }
