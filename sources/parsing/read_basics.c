@@ -19,12 +19,16 @@ int	read_ambient_light(t_parse *intel, char *line)
 	int	ret;
 
 	ret = 0;
+
 	line = skip_spaces(line);
 	intel->scene.ambient = ft_atof_minirt(&line, &ret);
+	want_ratio(intel->scene.ambient, &ret);
+
 	line = skip_spaces(line);
 	intel->scene.ambient_color = read_color(&line, &ret);
+
 	if (eol_checker(&line) != 0)
-		ret = TRAILING_CHARS;
+		set_if_zero(&ret, TRAILING_CHARS);
 	return (ret);
 }
 
@@ -35,16 +39,18 @@ int	read_camera(t_parse *intel, char *line)
 	ret = 0;
 	line = skip_spaces(line);
 	intel->cam.viewpoint = read_vec(&line, &ret);
+
 	line = skip_spaces(line);
 	intel->cam.dir = read_vec(&line, &ret);
-	if (!ft_near_zero(ft_sqnorm(intel->cam.dir) - 1, 0.01))
-		ret = DIR_NOT_UNIT;
+	want_unit(intel->cam.dir, &ret);
+
 	line = skip_spaces(line);
 	intel->cam.fov_deg = ft_atoi_minirt(&line, &ret);
-	if (!(0 < intel->cam.fov_deg && intel->cam.fov_deg < 180))
-		ret = WRONG_VALUE;
+	if (!ret && !(0 < intel->cam.fov_deg && intel->cam.fov_deg < 180))
+		set_if_zero(&ret, WRONG_VALUE);
+
 	if (eol_checker(&line) != 0)
-		ret = TRAILING_CHARS;
+		set_if_zero(&ret, WRONG_VALUE);
 	return (ret);
 }
 
@@ -56,7 +62,7 @@ int	read_light(t_parse *intel, char *line)
 	ret = 0;
 	new = malloc(sizeof(t_light_list));
 	if (!new)
-		error_handler(MALLOC_ERR);
+		return (MALLOC_ERR);
 	new->next = intel->scene.lights;
 	intel->scene.lights = new;
 	new->light.no_flare = 0;
@@ -64,15 +70,15 @@ int	read_light(t_parse *intel, char *line)
 	new->light.pos = read_vec(&line, &ret);
 	line = skip_spaces(line);
 	new->light.intensity = ft_atof_minirt(&line, &ret);
-	if (0.0 <= new->light.intensity && new->light.intensity <= 1.0)
-		ret = WRONG_VALUE;
+	want_ratio(new->light.intensity, &ret);
 	line = skip_spaces(line);
 	new->light.color = read_color(&line, &ret);
+	if (eol_checker(&line) == 0)
+		return (ret);
 	line = skip_spaces(line);
 	new->light.no_flare = ft_atoi_minirt(&line, &ret);
-	if (new->light.no_flare != 1 && new->light.no_flare != 0)
-		ret = WRONG_VALUE;
+	want_bool(new->light.no_flare, &ret);
 	if (eol_checker(&line) != 0)
-		ret = TRAILING_CHARS;
+		set_if_zero(&ret, TRAILING_CHARS);
 	return (ret);
 }

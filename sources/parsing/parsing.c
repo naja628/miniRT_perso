@@ -22,14 +22,29 @@ void	init_intel(t_parse *intel)
 	intel->num_cameras = 0;
 }
 
-void	read_intel(char *av, t_parse *intel)
+int	cam_and_ambient_once(t_parse *intel, int *error)
 {
-	int		exit_code;
+	if (*error)
+		return (*error);
+	if (intel->num_cameras != 1)
+		*error = NOT_ONE_CAM;
+	if (intel->num_ambients != 1)
+		*error = NOT_ONE_AMBIENT;
+	print_error(*error, NULL);
+	return (*error);
+}
 
-	exit_code = 0;
+int	read_intel(char *av, t_parse *intel)
+{
+	int		error;
+
+	error = 0;
 	intel->fd = open(av, O_RDONLY);
 	if (intel->fd == -1)
-		error_handler(READ_FILE_ERR);
+	{
+		print_error(READ_FILE_ERR, NULL);
+		return (READ_FILE_ERR);
+	}
 	while (19)
 	{
 		intel->line = get_next_line(intel->fd);
@@ -38,16 +53,17 @@ void	read_intel(char *av, t_parse *intel)
 			free(intel->line);
 			break ;
 		}
-		exit_code = read_id(intel);
+		error = read_id(intel);
+		print_error(error, intel->line);
 		free(intel->line);
-		if (exit_code == 1)
+		if (error)
 			break ;
 	}
 	close(intel->fd);
-	if (exit_code == 1)
-		exit(EXIT_FAILURE);
+	return (error || cam_and_ambient_once(intel, &error));
 }
 
+// We're not using this? maybe in main? TODO
 int	check_extension(char *file)
 {
 	if (ft_strnstr(file, ".rt", ft_strlen(file)) == NULL)

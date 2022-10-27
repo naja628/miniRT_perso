@@ -1,0 +1,7 @@
+in read_color + atof + atoi, don't do stuff if passed errcode != 0
+handle xpm error
+malloc errors? (DONE)
+intel prototypes thingy
+.h
+in atof do we accept .42 with no leading 0
+

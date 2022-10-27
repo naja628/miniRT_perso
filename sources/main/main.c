@@ -32,8 +32,11 @@ int	main(int ac, char **av)
 	ft_init_scr(&scr, 1000, 700, "miniRT");
 	init_intel(&intel);
 	intel.mlx = scr.mlx;
-	read_intel(av[1], &intel);
-	print_all_data(intel);
+	mem.scene = &(intel.scene);
+	mem.scr = &scr;
+	if (read_intel(av[1], &intel))
+		ft_quit(&mem);
+	print_all_data(intel); // DEBUG
 
 	// hardcone same scene as test.rt
 // 	t_light_list lights = {{ft_vec(0, 0, 3), 0.7, ft_vec(1, 1, 1)}, NULL};
@@ -46,11 +49,10 @@ int	main(int ac, char **av)
 
 	cam = intel.cam;
 	ft_mk_camscreen(&cam, (float) 700 / 1000);
+	printf("rendering...");
 	ft_render_scr(&scr, &cam, &(intel.scene));
 	mlx_put_image_to_window(scr.mlx, scr.win, scr.imptr, 0, 0);
 	printf("done\n"); // TODO (is printf allowed??)
-	mem.scene = &(intel.scene);
-	mem.scr = &scr;
 	mlx_key_hook(scr.win, ft_esc_exit_hook, &mem);
 	mlx_hook(scr.win, 17, 0, ft_quit, &mem);
 	mlx_loop(scr.mlx);

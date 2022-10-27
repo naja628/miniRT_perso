@@ -57,12 +57,14 @@ int	ft_atoi_minirt(char **str, int *ret)
 {
 	t_atoi	n;
 
+	if (*ret)
+		return (0);
 	n.lln = 0;
 	n.i = 1;
 	n.str_bis = *str;
-	if (!(*n.str_bis != '-') && !(48 <= *n.str_bis && *n.str_bis <= 57))
+	if (!(*n.str_bis == '-') && !(48 <= *n.str_bis && *n.str_bis <= 57))
 	{
-		*ret = WRONG_VALUE;
+		*ret = EXPECTED_NUMBER;
 		return (0);
 	}
 	if (*n.str_bis == '-')
@@ -93,14 +95,15 @@ float	ft_atof_minirt(char **str, int *ret)
 	float	k;
 	int		decimal;
 
+	if (*ret)
+		return (0);
 	n.lln = 0;
 	n.i = 1;
 	decimal = 1;
 	n.str_bis = (char *)*str;
 	if (!(*n.str_bis == '-') && !(48 <= *n.str_bis && *n.str_bis <= 57))
 	{
-		*ret = WRONG_VALUE;
-		printf("test success\n");
+		*ret = EXPECTED_NUMBER;
 		return (0);
 	}
 	if (*n.str_bis == '-')

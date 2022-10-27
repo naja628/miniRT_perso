@@ -44,5 +44,5 @@ t_vec	ft_color(t_vec p, t_shape *s)
 	if (test > 0)
 		return (s->color);
 	else
-		return (ft_scaled(0.3, s->color));
+		return (ft_scaled(0.1, s->color));
 }

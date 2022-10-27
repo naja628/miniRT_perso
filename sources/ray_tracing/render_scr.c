@@ -58,6 +58,8 @@ static t_vec	ft_avg_samples(int n, t_vec2 *smp, t_camera *cam, t_scene *sce)
 		++i;
 	}
 	ft_scale(1.0 / n, &vrgb);
+	// no gamma?
+	ft_gamma_correct(&vrgb);
 	return (vrgb);
 }
 #undef BOUNCES
@@ -77,7 +79,6 @@ void	ft_render_scr(t_scr *scr, t_camera *cam, t_scene *sce)
 		while (y < scr->h)
 		{
 			ft_scatter4(smp, ft_pix_center(x, y, scr), 0.5 / (scr->w - 1));
-			// gamma?
 			color = ft_vrgb_to_int(ft_avg_samples(4, smp, cam, sce));
 			ft_pixel_to_scr(scr, x, y, color);
 			++y;

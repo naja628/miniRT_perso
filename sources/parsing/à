@@ -39,6 +39,8 @@
 // use '#' instead of '//' as comment out symbol bc norminette dislikes '//' 
 
 // Error codes in parsing
+# define MALLOC_ERR 0
+# define FILE_EXT_ERR 1
 # define READ_FILE_ERR 2
 # define INVALID_DATA_ERR 3
 # define ARGUMENTS_ERR 4
@@ -53,10 +55,6 @@
 # define UNKNOWN_ID 6
 # define MALLOC_ERR 7
 # define FILE_EXT_ERR 8
-# define NOT_ONE_CAM 9
-# define NOT_ONE_AMBIENT 10
-# define XPM_READ 11
-# define MISSING_NUMBER 12
 
 typedef struct s_parse
 {
@@ -70,14 +68,11 @@ typedef struct s_parse
 	int			num_ambients;
 }				t_parse;
 
-typedef void	*(*t_read)(char **, int *);
+typedef void	*(*t_read)(t_parse *, char **, int *);
 
 // error handling
 
-void	print_error(int error, char *line);
 int		error_handler(int error);
-
-// TODO we don't need this anymore?
 int		error_handler_free(int error, char **in_line, t_parse *intel);
 
 // utilities
@@ -92,40 +87,30 @@ float	ft_atof_minirt(char **str, int *ret);
 
 // parsing
 
-int		cam_and_ambient_once(t_parse *intel, int *error);
 void	print_all_data(t_parse intel);
 int		check_extension(char *file);
-int		read_intel(char *av, t_parse *intel);
+void	read_intel(char *av, t_parse *intel);
 void	init_intel(t_parse *intel);
 
 // data handling
 
 int		read_id(t_parse *intel);
 void	assign_intel(t_parse *intel, char **in_line);
-void	*read_plane(char **line, int *ret);
-void	*read_cylinder(char **line, int *ret);
-void	*read_sphere(char **line, int *ret);
-void	*read_cone(char **line, int *ret);
+void	*read_plane(t_parse *intel, char **line, int *ret);
+void	*read_cylinder(t_parse *intel, char **line, int *ret);
+void	*read_sphere(t_parse *intel, char **line, int *ret);
+void	*read_cone(t_parse *intel, char **line, int *ret);
 int		read_shape(t_parse *intel, char *line, t_read fun, t_shapetype type);
 int		read_light(t_parse *intel, char *line);
 int		read_camera(t_parse *intel, char *line);
 int		read_ambient_light(t_parse *intel, char *line);
-int 	read_bonus(char *line, t_shape_list *new, void *mlx, int *ret);
+void	read_bonus(char *line, t_shape_list *new, void *mlx, int *ret);
 
 // data utilities
 
 t_vec	read_color(char **line, int *error);
 t_vec	read_vec(char **line, int *error);
 int		eol_checker(char **line);
-
-// data validation
-
-int		want_bool(int boolean, int *berr);
-int		want_positive(float x, int *berr);
-int		want_ratio(float ratio, int *berr);
-int		want_unit(t_vec	unit, int *berr);
-int		set_if_zero(int *berr, int new_err);
-int		want_coefs(t_shape *s, int *berr);
 
 // free stuff
 
