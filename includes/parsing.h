@@ -6,7 +6,7 @@
 /*   By: xle-boul <xle-boul@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 21:17:35 by xle-boul          #+#    #+#             */
-/*   Updated: 2022/10/26 23:27:33 by xle-boul         ###   ########.fr       */
+/*   Updated: 2022/10/27 22:50:42 by xle-boul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@
 # define INVALID_DATA_ERR 3
 # define ARGUMENTS_ERR 4
 
-
 // Error codes in read
 # define COMMA_SEP 1
 # define TRAILING_CHARS 2
@@ -68,6 +67,7 @@ typedef struct s_parse
 	void		*mlx;
 	int			num_cameras;
 	int			num_ambients;
+	int			num_lights;
 }				t_parse;
 
 typedef void	*(*t_read)(char **, int *);
@@ -76,9 +76,6 @@ typedef void	*(*t_read)(char **, int *);
 
 void	print_error(int error, char *line);
 int		error_handler(int error);
-
-// TODO we don't need this anymore?
-int		error_handler_free(int error, char **in_line, t_parse *intel);
 
 // utilities
 
@@ -110,7 +107,7 @@ int		read_shape(t_parse *intel, char *line, t_read fun, t_shapetype type);
 int		read_light(t_parse *intel, char *line);
 int		read_camera(t_parse *intel, char *line);
 int		read_ambient_light(t_parse *intel, char *line);
-int 	read_bonus(char *line, t_shape_list *new, void *mlx, int *ret);
+int		read_bonus(char *line, t_shape_list *new, void *mlx, int *ret);
 
 // data utilities
 
@@ -126,9 +123,5 @@ int		want_ratio(float ratio, int *berr);
 int		want_unit(t_vec	unit, int *berr);
 int		set_if_zero(int *berr, int new_err);
 int		want_coefs(t_shape *s, int *berr);
-
-// free stuff
-
-void	free_array_of_strings(char **in_line);
 
 #endif
