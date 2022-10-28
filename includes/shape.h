@@ -89,7 +89,7 @@ t_vec	ft_bumped_normal(t_vec p, t_shape *s);
 // will be filled with {e0, e1, e2} vectors such that:
 // * the basis is orthonormal
 // * they are all unit vectors,
-// * e2 points is the normal
+// * e2 is the normal
 // * e0 (e1) points in the direction of "increasing" xs (ys)
 t_vec2	ft_map2d(t_vec p, t_shape *s, t_basis *basis);
 

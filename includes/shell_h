@@ -1,0 +1,61 @@
+#ifndef SHELL_H
+# define SHELL_H
+
+# include "parsing.h"
+# include "vec.h"
+# include "shape.h"
+# include "render.h"
+# include "scr.h"
+
+typedef enum e_lsc {LSC_LIGHT, LSC_CAMERA, LSC_SHAPE} t_lsc;
+typedef struct s_shell_data
+{
+	t_parse	*data;
+	t_lsc	select_type;
+	t_vec	*rot_dir;
+	t_vec	*mv_p;
+	float	*h;
+	float	*w;
+	t_shape_list *its;
+	t_light_list *itl;
+	char *args_line;
+	t_scr *scr;
+// 	int hl;
+}	t_shell_data;
+
+void	init_shell_data(t_shell_data *t, t_parse *data, t_scr *scr);
+
+// utils
+void	re_null(t_shell_data *t);
+void	set_pointers(t_shell_data *t, t_shape *s);
+void	draw_highlight(t_shell_data *t);
+
+// cmds
+void	cmd_l(t_shell_data *t);
+void	cmd_s(t_shell_data *t);
+void	cmd_c(t_shell_data *t);
+void	cmd_n(t_shell_data *t);
+void	cmd_w(t_shell_data *t);
+void	cmd_h(t_shell_data *t);
+void	cmd_mv(t_shell_data *t);
+void	cmd_render(t_shell_data *t);
+void	cmd_new(t_shell_data *t);
+void	cmd_del(t_shell_data *t);
+void	cmd_rot(t_shell_data *t);
+void	cmd_hl(t_shell_data *t);
+
+// dispatching
+typedef void (*t_cmd)(t_shell_data *);
+typedef struct s_dispatch
+{
+	char	*cmd;
+	t_cmd	fun;
+}	t_dispatch;
+
+t_dispatch *dispatch_table(void);
+void dispatch(char *line, t_shell_data *t);
+
+// main fun (hook with `mlx_loop_hook`)
+int minirt_shell(t_shell_data *t);
+
+#endif

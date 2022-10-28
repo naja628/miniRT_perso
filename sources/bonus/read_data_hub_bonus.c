@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   read_data_hub.c                                    :+:      :+:    :+:   */
+/*   read_data_hub_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: xle-boul <xle-boul@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 23:03:04 by xle-boul          #+#    #+#             */
-/*   Updated: 2022/10/28 23:09:22 by xle-boul         ###   ########.fr       */
+/*   Updated: 2022/10/28 23:08:15 by xle-boul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,10 @@ int	read_id_shapes(t_parse *intel)
 		return (read_shape(intel, (intel->line + 2), read_sphere, SHP_SPHERE));
 	else if (id_match(intel->line, CYLINDER, 2))
 		return (read_shape(intel, (intel->line + 2), read_cylinder, SHP_CYLIN));
-	else
+	else if (id_match(intel->line, PLANE, 2))
 		return (read_shape(intel, (intel->line + 2), read_plane, SHP_PLANE));
+	else
+		return (read_shape(intel, (intel->line + 2), read_cone, SHP_CONE));
 }
 
 int	read_id(t_parse *intel)
@@ -46,19 +48,17 @@ int	read_id(t_parse *intel)
 		intel->num_ambients++;
 		return (read_ambient_light(intel, (intel->line + 1)));
 	}
+	else if (id_match(intel->line, LIGHT, 1))
+		return (read_light(intel, (intel->line + 1)));
 	else if (id_match(intel->line, CAMERA, 1))
 	{
 		intel->num_cameras++;
 		return (read_camera(intel, (intel->line + 1)));
 	}
-	else if (id_match(intel->line, LIGHT, 1))
-	{
-		intel->num_lights++;
-		return (read_light(intel, (intel->line + 1)));
-	}
 	else if (id_match(intel->line, SPHERE, 2)
 		|| id_match(intel->line, CYLINDER, 2)
-		|| id_match(intel->line, PLANE, 2))
+		|| id_match(intel->line, PLANE, 2)
+		|| id_match(intel->line, CONE, 2))
 		return (read_id_shapes(intel));
 	else if (!(ft_strncmp(intel->line, COMMENT, 1) == 0))
 		return (UNKNOWN_ID);
