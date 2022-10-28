@@ -60,7 +60,7 @@ int	main(int ac, char **av)
 	printf("done\n");
 	init_shell_data(&sh_data, &intel, &scr);
 // 	minirt_shell(&sh_data);
-	mlx_loop_hook(scr.mlx, minirt_shell, &sh_data);
+	mlx_mouse_hook(scr.win, minirt_shell_hook, &sh_data);
 	mlx_key_hook(scr.win, ft_esc_exit_hook, &mem);
 	mlx_hook(scr.win, 17, 0, ft_quit, &mem);
 	mlx_loop(scr.mlx);
