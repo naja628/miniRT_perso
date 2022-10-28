@@ -14,10 +14,6 @@
 
 #include "debug.h"
 #include "render_scr.h"
-#include "scr.h"
-#include "camera.h"
-#include "shell.h"
-
 // void	ft_gamma_scene(t_scene *scene);
 // static int ft_pixel_color(int x, int y, int scr_w, t_scene *sce, t_camera *cam);
 // void	ft_render_scr(t_scr *scr, t_camera *cam, t_scene *scene);
@@ -25,7 +21,7 @@ int	main(int ac, char **av)
 {
 	t_parse	intel;
 	t_scr	scr;
-	t_camera *cam;
+	t_camera cam;
 	t_mem	mem;
 	t_shell_data sh_data;
 
@@ -52,15 +48,14 @@ int	main(int ac, char **av)
 // 	ft_init_camera(&hardcam, ft_vec(0, -5, 0), ft_vec(0, 1, 0), 70);
 // 	ft_mk_camscreen(&hardcam, (float) 700 / 1000);
 
-	cam = &(intel.cam);
-	ft_mk_camscreen(cam, (float) 700 / 1000);
-	printf("rendering...\n");
-	ft_render_scr(&scr, cam, &(intel.scene));
+	cam = intel.cam;
+	ft_mk_camscreen(&cam, (float) 700 / 1000);
+	printf("rendering...");
+	ft_render_scr(&scr, &cam, &(intel.scene));
 	mlx_put_image_to_window(scr.mlx, scr.win, scr.imptr, 0, 0);
 	printf("done\n");
-	init_shell_data(&sh_data, &intel, &scr);
-// 	minirt_shell(&sh_data);
-	mlx_loop_hook(scr.mlx, minirt_shell, &sh_data);
+	init_shell_data(&sh_data,
+
 	mlx_key_hook(scr.win, ft_esc_exit_hook, &mem);
 	mlx_hook(scr.win, 17, 0, ft_quit, &mem);
 	mlx_loop(scr.mlx);

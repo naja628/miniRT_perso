@@ -86,6 +86,7 @@ char	**ft_split(char const *s, char c);
 char	*skip_spaces(char *line);
 int		ft_atoi_minirt(char **str, int *ret);
 float	ft_atof_minirt(char **str, int *ret);
+int		id_match(char *linestart, char *id, size_t id_len);
 
 // parsing
 

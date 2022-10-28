@@ -47,7 +47,7 @@ OBJ_DIR := objs
 #
 # INSERT HERE THE NAMES OF THE FOLDERS INTO SOURCES THAT YOU WANT TO COMPILE
 #
-SUB_DIRS := parsing gnl ray_tracing main
+SUB_DIRS := parsing gnl ray_tracing main shell
 
 SOURCEDIRS := $(foreach dir, $(SUB_DIRS), $(addprefix $(SRC_DIR)/, $(dir)))
 

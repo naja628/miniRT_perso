@@ -19,12 +19,16 @@
 // intel->error = 2;
 
 // returns 1 if line begins with id
-static int	id_match(char *linestart, char *id, size_t id_len)
+int	id_match(char *linestart, char *id, size_t id_len)
 {
 	char	after;
 
+	// TODO problem if line shorter than id
+	if (ft_strlen(linestart) < id_len)
+		return (0);
 	after = linestart[id_len];
-	if (!ft_strncmp(linestart, id, id_len) && (after == ' ' || after == '\t'))
+	if (!ft_strncmp(linestart, id, id_len) 
+		&& (after == ' ' || after == '\t' || after == '\n' || after == '\0'))
 		return (1);
 	else
 		return (0);
