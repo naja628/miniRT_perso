@@ -1,0 +1,16 @@
+to be super safe with rotation / translation things implement a shell with 
+the following commands
+l -> lights
+s -> shapes
+c -> camera
+sc -> select camera
+sn -> select next shape
+sp -> select prev shape
+hl -> toggle highlight
+w -> width (diam for sp etc)
+h -> height (cone and cy)
+mv vec -> translation
+rot axis angle -> rotation
+del -> del
+render -> render
+new -> read rest of the line like rt file
