@@ -6,7 +6,7 @@
 /*   By: xle-boul <xle-boul@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 17:44:45 by xle-boul          #+#    #+#             */
-/*   Updated: 2022/10/27 21:02:01 by xle-boul         ###   ########.fr       */
+/*   Updated: 2022/10/28 21:22:11 by xle-boul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,24 @@
 #include "camera.h"
 #include "shell.h"
 
-// void	ft_gamma_scene(t_scene *scene);
-// static int ft_pixel_color(int x, int y, int scr_w, t_scene *sce, t_camera *cam);
-// void	ft_render_scr(t_scr *scr, t_camera *cam, t_scene *scene);
+void	norm_main(t_parse *intel, t_camera *cam,
+	t_scr *scr, t_shell_data *sh_data)
+{
+	ft_mk_camscreen(cam, (float) 700 / 1000);
+	printf("rendering...\n");
+	ft_render_scr(scr, cam, &(intel->scene));
+	mlx_put_image_to_window(scr->mlx, scr->win, scr->imptr, 0, 0);
+	printf("done\n");
+	init_shell_data(sh_data, intel, scr);
+}
+
 int	main(int ac, char **av)
 {
-	t_parse	intel;
-	t_scr	scr;
-	t_camera *cam;
-	t_mem	mem;
-	t_shell_data sh_data;
-
+	t_parse			intel;
+	t_scr			scr;
+	t_camera		cam;
+	t_mem			mem;
+	t_shell_data	sh_data;
 
 	if (ac != 2)
 		error_handler(MALLOC_ERR);
@@ -41,24 +48,8 @@ int	main(int ac, char **av)
 	mem.scr = &scr;
 	if (read_intel(av[1], &intel))
 		ft_quit(&mem);
-	// print_all_data(intel); // DEBUG
-
-	// hardcone same scene as test.rt
-// 	t_light_list lights = {{ft_vec(0, 0, 3), 0.7, ft_vec(1, 1, 1)}, NULL};
-// 	t_sphere sp = {ft_vec(0, 0, 0), 1};
-// 	t_shape_list	shapes = {{SHP_SPHERE, &sp, ft_vec(1, 0, 0), 0, 1}, NULL};
-// 	t_scene		hardsce = {0.2, ft_vec(1, 1, 1), &lights, &shapes};
-// 	t_camera	hardcam;
-// 	ft_init_camera(&hardcam, ft_vec(0, -5, 0), ft_vec(0, 1, 0), 70);
-// 	ft_mk_camscreen(&hardcam, (float) 700 / 1000);
-
-	cam = &(intel.cam);
-	ft_mk_camscreen(cam, (float) 700 / 1000);
-	printf("rendering...\n");
-	ft_render_scr(&scr, cam, &(intel.scene));
-	mlx_put_image_to_window(scr.mlx, scr.win, scr.imptr, 0, 0);
-	printf("done\n");
-	init_shell_data(&sh_data, &intel, &scr);
+	cam = intel.cam;
+	norm_main(&intel, &cam, &scr, &sh_data);
 // 	minirt_shell(&sh_data);
 	mlx_mouse_hook(scr.win, minirt_shell_hook, &sh_data);
 	mlx_key_hook(scr.win, ft_esc_exit_hook, &mem);

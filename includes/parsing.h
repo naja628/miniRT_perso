@@ -6,7 +6,7 @@
 /*   By: xle-boul <xle-boul@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 21:17:35 by xle-boul          #+#    #+#             */
-/*   Updated: 2022/10/27 22:50:42 by xle-boul         ###   ########.fr       */
+/*   Updated: 2022/10/28 23:10:49 by xle-boul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@
 # define NOT_ONE_AMBIENT 10
 # define XPM_READ 11
 # define MISSING_NUMBER 12
+# define NOT_ONE_LIGHT 13
 
 typedef struct s_parse
 {

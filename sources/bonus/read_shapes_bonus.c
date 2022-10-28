@@ -6,7 +6,7 @@
 /*   By: xle-boul <xle-boul@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 22:30:23 by xle-boul          #+#    #+#             */
-/*   Updated: 2022/10/28 21:51:39 by xle-boul         ###   ########.fr       */
+/*   Updated: 2022/10/27 23:04:39 by xle-boul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	read_shape(t_parse *intel, char *line, t_read fun, t_shapetype type)
 	line = skip_spaces(line);
 	new->shape.color = read_color(&line, &ret);
 	if (eol_checker(&line) != 0)
-		ret = INVALID_DATA_ERR;
+		return (read_bonus(line, new, intel->mlx, &ret));
 	return (ret);
 }
 

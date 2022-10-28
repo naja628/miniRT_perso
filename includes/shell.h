@@ -7,23 +7,28 @@
 # include "render.h"
 # include "scr.h"
 
-typedef enum e_lsc {LSC_LIGHT, LSC_CAMERA, LSC_SHAPE} t_lsc;
+typedef enum e_lsc
+{
+	LSC_LIGHT,
+	LSC_CAMERA,
+	LSC_SHAPE
+}			t_lsc;
+
 typedef struct s_shell_data
 {
-	t_parse	*data;
-	t_lsc	select_type;
-	t_vec	*rot_dir;
-	t_vec	*mv_p;
-	float	*h;
-	float	*w;
-	t_shape_list *its;
-	t_light_list *itl;
-	char *args_line;
-	t_scr *scr;
-// 	int hl;
+	t_parse			*data;
+	t_lsc			select_type;
+	t_vec			*rot_dir;
+	t_vec			*mv_p;
+	float			*h;
+	float			*w;
+	t_shape_list	*its;
+	t_light_list	*itl;
+	char			*args_line;
+	t_scr			*scr;
 }	t_shell_data;
 
-// utils
+// pointers
 void	null_pointers(t_shell_data *t);
 void	set_pointers(t_shell_data *t);
 void	init_shell_data(t_shell_data *t, t_parse *data, t_scr *scr);
@@ -40,14 +45,15 @@ int		cmd_render(t_shell_data *t);
 int		cmd_rot(t_shell_data *t);
 
 // dispatcher
-typedef int (*t_cmd)(t_shell_data *);
+typedef int	(*t_cmd)(t_shell_data *);
 typedef struct s_dispatch
 {
 	char	*cmd;
 	t_cmd	fun;
-}	t_dispatch;
-t_dispatch *dispatch_table(void);
-int dispatch(char *line, t_shell_data *t);
+}				t_dispatch;
+
+t_dispatch	*dispatch_table(void);
+int		dispatch(char *line, t_shell_data *t);
 
 // hook
 void	exe_line(char *line, t_shell_data *t);
