@@ -43,6 +43,7 @@ int		cmd_h(t_shell_data *t);
 int		cmd_mv(t_shell_data *t);
 int		cmd_render(t_shell_data *t);
 int		cmd_rot(t_shell_data *t);
+int		cmd_ppos(t_shell_data *t);
 
 // dispatcher
 typedef int	(*t_cmd)(t_shell_data *);

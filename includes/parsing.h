@@ -6,7 +6,7 @@
 /*   By: xle-boul <xle-boul@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 21:17:35 by xle-boul          #+#    #+#             */
-/*   Updated: 2022/10/28 23:10:49 by xle-boul         ###   ########.fr       */
+/*   Updated: 2022/10/29 13:49:09 by xle-boul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,9 @@
 # define UNKNOWN_ID 6
 # define MALLOC_ERR 7
 # define FILE_EXT_ERR 8
-# define NOT_ONE_CAM 9
-# define NOT_ONE_AMBIENT 10
-# define XPM_READ 11
-# define MISSING_NUMBER 12
-# define NOT_ONE_LIGHT 13
+# define UNIQUE_ELEM 9
+# define XPM_READ 10
+# define MISSING_NUMBER 11
 
 typedef struct s_parse
 {

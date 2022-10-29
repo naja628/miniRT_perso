@@ -6,7 +6,7 @@ static void	init_dispatch(t_dispatch *t, char *cmd, t_cmd fun)
 	t->fun = fun;
 }
 
-#define NCMD 9
+#define NCMD 10
 
 t_dispatch	*dispatch_table(void)
 {
@@ -24,6 +24,7 @@ t_dispatch	*dispatch_table(void)
 		init_dispatch(t + 6, "mv", cmd_mv);
 		init_dispatch(t + 7, "rot", cmd_rot);
 		init_dispatch(t + 8, "render", cmd_render);
+		init_dispatch(t + 9, "ppos", cmd_ppos);
 		init = 1;
 	}
 	return (t);

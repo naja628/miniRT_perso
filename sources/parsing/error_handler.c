@@ -6,7 +6,7 @@
 /*   By: xle-boul <xle-boul@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 21:44:11 by xle-boul          #+#    #+#             */
-/*   Updated: 2022/10/27 22:44:31 by xle-boul         ###   ########.fr       */
+/*   Updated: 2022/10/29 13:55:24 by xle-boul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,8 @@ void	print_error(int error, char *line)
 		printf("Failed to read xpm. Expected ... <valid_xpm> <map_height>\n");
 	else if (error == READ_FILE_ERR)
 		printf("Could not open .rt file\n");
-	else if (error == NOT_ONE_CAM)
-		printf("Must define camera exactly once\n");
-	else if (error == NOT_ONE_AMBIENT)
-		printf("Must define ambient light exactly once\n");
+	else if (error == UNIQUE_ELEM)
+		printf("Unique elements must be defined exactly once\n");
 }
 
 int	error_handler(int error)

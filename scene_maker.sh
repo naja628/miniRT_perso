@@ -3,7 +3,7 @@
 ## colors
 white='255,255,255'
 grey='128,128,128'
-reaspberry'255,0,0'
+red='255,0,0'
 green='0,255,0'
 blue='0,0,255'
 redish='255,128,128'
@@ -164,7 +164,7 @@ replace_rt='./replace_rt.sh' # useful for debug
 # pl	0,0,-2		$z	$white		$matte 1
 # SCENE
 
-$replace_rt box.rt << SCENE
+$replace_rt "${rt_dir}" box.rt << SCENE
 A 0.1               255,255,255
 C 0,-10,0          0,1,0           90
 L 0,-11,4         0.7             255,255,255
@@ -180,7 +180,17 @@ sp -2,-4,-2		3					$green
 cy 0,-11,0	`unit 0 1 0`	3 3 $raspberry
 SCENE
 
-$replace_rt building.rt << SCENE
+$replace_rt "${rt_dir}/bonus" mirror.rt << SCENE 
+A	0.15	$white
+C	6,-6,0	`unit -1 1 0`	70
+L	1,-1,3	3		$white	
+
+pl	-2,0,0  $x		$blue		$mirror 0
+pl	0,2,0	$negy	$white		$shiny	1
+sp	$zero	2		$raspberry 	$shiny 0
+SCENE
+
+$replace_rt "${rt_dir}" building.rt << SCENE
 A 0.1               255,255,255
 C 0,-10,0          0,1,0           90
 L 0,-11,4         0.7             255,255,255
@@ -211,7 +221,74 @@ sp 7,3,5	2			$raspberry
 
 pl 0,0,5	$negz		$white
 pl 0,0,-5	$z			$white
-pl 0,10,0	$y			$black
+pl 0,10,0	$y			0,0,0
 SCENE
 
+$new_rt "${rt_dir}/bonus" lampshade.rt << SCENE
+A	0.3		$white
+C	0,-10,0 `unit -1 4 -1` 	70
+L	-1,0,-1	6	$yellowish
+# adding this light allows the cone to not look flat
+L	0,0,30  20  $blueish
+cn  $zero `unit -1 -0.4 -1` 1 2 	$purple $shiny 0
+pl  0,0,-3 $z 						$grey $polish 1
+SCENE
 
+bonus="0.5 0.2 0.3 0 xpm_height_maps/rough_stripes.xpm $pi"
+$replace_rt "${rt_dir}/bonus" cn_sp_cy.rt << SCENE
+A 0.15			$white
+C 0,-10,0		0,1,0           70
+L 0,0,3         2.5             $white
+# test comment
+cn	-2.5,0,0    0,0,-1   0.5 `cn_ht 0.5 $pi`   255,0,128 $bonus
+sp	0,0,0           2              			   190,255,0 $bonus
+cy	2.5,0,0  	 0,0,1  2   3    			   64,0,255 $bonus
+
+SCENE
+
+$new_rt "${rt_dir}/bonus" spheres.rt << SCENE
+A	0.10			$white
+C	7.5,-4.5,0		`unit -1 1 0`	55
+L	5,2,0		6	$yellowish
+sp	0,3,0		2	$turquoise $matte
+sp	-4.5,3,0	6	$orange	$polish
+sp	0,4,1.5		1.6	$purple	$polish
+SCENE
+
+$new_rt "${rt_dir}/bonus" bicolor.rt << SCENE
+A	0.2			$white
+C	0,-8,0		$y	55
+L	-3.5,-1,0	8	$orange
+L	3.5,-1,0	8	$turquoise
+sp	-1.5,1,-1	2	0,100,255	$shiny
+sp	1.5,1,-1	2	$white 		$matte 1
+pl	0,4,0		$y	$grey		$shiny 0
+pl	0,0,-2		$z	$white		$matte 1
+SCENE
+
+$new_rt "${rt_dir}/bonus" earth.rt << SCENE
+A 0.4               $white
+C -4,0,0          $x           70
+# C 0,-5,0          0,1,0           50
+
+L 0.5,-2,2.5      4             $white
+
+#sp 0,0,0      2   $white  $shiny 0 xpm_height_maps/earth.xpm 3.1415
+sp 0,0,0      2   255,128,64  $shiny 0 xpm_height_maps/earth.xpm 3.1415
+#pl 0,0,-1     $z  $blueish  0.5 0.5 0 1
+pl 0,0,-1     $z  $white  $polish 1
+cy -1.5,1.5,-1	$z 0.5  1 $raspberry $matte 0 xpm_height_maps/rough_stripes.xpm 1.57
+SCENE
+
+$replace_rt "${rt_dir}/bonus" slanted_cylinder.rt << SCENE
+A	0.2			$white
+C	0,-8,0		$y	55
+
+#L	0,-1,5		6	$yellowish
+L	`unit 2 1 2` 7  $blueish
+
+#pl	0,0,-1	$z	$purple $polish 0
+#cy  0,0,0	`unit 2 1 2` 2 10 $white $polish 1
+pl	0,0,-1	$z	$white $polish 1
+cy  0,0,0	`unit 2 1 2` 2 10 $turquoise $shiny 0
+SCENE

@@ -42,3 +42,17 @@ int	cmd_render(t_shell_data *t)
 	printf("done\n");
 	return (0);
 }
+
+int	cmd_ppos(t_shell_data *t)
+{
+	t_vec p;
+
+	if (!(t->mv_p))
+		return (printf("Nothing selected\n"));
+	else
+	{
+		p = *(t->mv_p);
+		printf("selection : element at x=%f, y=%f, z=%f\n", p.x, p.y, p.z);
+	}
+	return (0);
+}

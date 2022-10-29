@@ -6,7 +6,7 @@
 /*   By: xle-boul <xle-boul@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 21:17:08 by xle-boul          #+#    #+#             */
-/*   Updated: 2022/10/28 23:12:45 by xle-boul         ###   ########.fr       */
+/*   Updated: 2022/10/29 13:51:58 by xle-boul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,11 @@ int	cam_and_ambient_once(t_parse *intel, int *error)
 	if (*error)
 		return (*error);
 	if (intel->num_cameras != 1)
-		*error = NOT_ONE_CAM;
+		*error = UNIQUE_ELEM;
 	if (intel->num_ambients != 1)
-		*error = NOT_ONE_AMBIENT;
+		*error = UNIQUE_ELEM;
 	if (intel->num_lights != 1)
-		*error = NOT_ONE_LIGHT;
+		*error = UNIQUE_ELEM;
 	print_error(*error, NULL);
 	return (*error);
 }
