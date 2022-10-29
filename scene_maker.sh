@@ -110,7 +110,7 @@ rt_dir='rt_scenes'
 new_rt='./new_rt.sh'
 replace_rt='./replace_rt.sh' # useful for debug
 
-$new_rt mirror.rt << SCENE 
+$new_rt "${rt_dir}/bonus" mirror.rt << SCENE 
 A	0.15	$white
 C	6,-6,0	`unit -1 1 0`	70
 
@@ -121,7 +121,7 @@ pl	0,2,0	$negy	$white		$shiny	1
 sp	$zero	2		$raspberry 	$shiny 0
 SCENE
 
-$new_rt lampshade.rt << SCENE
+$new_rt "${rt_dir}/bonus" lampshade.rt << SCENE
 A	0.3		$white
 C	0,-10,0 `unit -1 4 -1` 	70
 L	-1,0,-1	6	$yellowish
@@ -132,7 +132,7 @@ pl  0,0,-3 $z 						$grey $polish 1
 SCENE
 
 bonus="0.5 0.2 0.3 0 xpm_height_maps/rough_stripes.xpm $pi"
-$new_rt cn_sp_cy.rt << SCENE
+$new_rt "${rt_dir}/bonus" cn_sp_cy.rt << SCENE
 A 0.15			$white
 C 0,-10,0		0,1,0           70
 L 0,0,3         2.5             $white
@@ -144,7 +144,7 @@ cy	2.5,0,0  	 0,0,1  2   3    			   64,0,255 $bonus
 
 SCENE
 
-$new_rt spheres.rt << SCENE
+$new_rt "${rt_dir}/bonus" spheres.rt << SCENE
 A	0.10			$white
 C	7.5,-4.5,0		`unit -1 1 0`	55
 L	5,2,0		6	$yellowish
@@ -153,7 +153,7 @@ sp	-4.5,3,0	6	$orange	$polish
 sp	0,4,1.5		1.6	$purple	$polish
 SCENE
 
-$replace_rt bicolor.rt << SCENE
+$new_rt "${rt_dir}/bonus" bicolor.rt << SCENE
 A	0.2			$white
 C	0,-8,0		$y	55
 L	-3.5,-1,0	8	$orange
@@ -164,4 +164,29 @@ pl	0,4,0		$y	$grey		$shiny 0
 pl	0,0,-2		$z	$white		$matte 1
 SCENE
 
+$new_rt "${rt_dir}/bonus" earth.rt << SCENE
+A 0.4               $white
+C -4,0,0          $x           70
+# C 0,-5,0          0,1,0           50
 
+L 0.5,-2,2.5      4             $white
+
+#sp 0,0,0      2   $white  $shiny 0 xpm_height_maps/earth.xpm 3.1415
+sp 0,0,0      2   255,128,64  $shiny 0 xpm_height_maps/earth.xpm 3.1415
+#pl 0,0,-1     $z  $blueish  0.5 0.5 0 1
+pl 0,0,-1     $z  $white  $polish 1
+cy -1.5,1.5,-1	$z 0.5  1 $raspberry $matte 0 xpm_height_maps/rough_stripes.xpm 1.57
+SCENE
+
+$replace_rt "${rt_dir}/bonus" slanted_cylinder.rt << SCENE
+A	0.2			$white
+C	0,-8,0		$y	55
+
+#L	0,-1,5		6	$yellowish
+L	`unit 2 1 2` 7  $blueish
+
+#pl	0,0,-1	$z	$purple $polish 0
+#cy  0,0,0	`unit 2 1 2` 2 10 $white $polish 1
+pl	0,0,-1	$z	$white $polish 1
+cy  0,0,0	`unit 2 1 2` 2 10 $turquoise $shiny 0
+SCENE

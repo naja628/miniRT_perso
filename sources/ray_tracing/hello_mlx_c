@@ -213,14 +213,14 @@ static int ft_pixel_color(int x, int y, int scr_w, t_scene *sce, t_camera *cam)
 // 	t_scene scene = {0.15, &light, &objs};
 
 // 	// scene 8 a cylinder
-// 	t_plane floor = {ft_vec(0, 0, -1), ft_vec(0, 0, 1)};
-// 	t_cone cn = {ft_vec(0, 0, 0), ft_vec(0, 0, 1), 0.25, M_PI};
-// 	t_shape_list one = {{SHP_PLANE, &floor, ft_color_vec(0x80ff), 0, POLISH}, NULL};
-// 	t_shape_list objs = {{SHP_CONE, &cn, ft_color_vec(0x8000ff), 1, SHINY}, &one};
-// 	t_light_list light = {{ft_vec(0, -3, 5), 0.7, {1, 1, 0.5}}, NULL};
-// // 	t_vec middle = ft_vec_add(cy.p, ft_scaled(M_PI / 2, cy.dir));
-// // 	t_light_list light = {{middle, 0.7, {1, 1, 0.5}}, NULL};
-// 	t_scene scene = {0.40, ft_vec(1, 0, .25), &light, &objs};
+	t_plane floor = {ft_vec(0, 0, -1), ft_vec(0, 0, 1)};
+	t_cone cn = {ft_vec(0, 0, 0), ft_vec(0, 0, 1), 0.25, M_PI};
+	t_shape_list one = {{SHP_PLANE, &floor, ft_color_vec(0x80ff), 0, POLISH}, NULL};
+	t_shape_list objs = {{SHP_CONE, &cn, ft_color_vec(0x8000ff), 1, SHINY}, &one};
+	t_light_list light = {{ft_vec(0, -3, 5), 0.7, {1, 1, 0.5}}, NULL};
+// 	t_vec middle = ft_vec_add(cy.p, ft_scaled(M_PI / 2, cy.dir));
+// 	t_light_list light = {{middle, 0.7, {1, 1, 0.5}}, NULL};
+	t_scene scene = {0.40, ft_vec(1, 0, .25), &light, &objs};
 
 #include <stdio.h>
 void	ft_render_scr(t_scr *scr, t_camera *cam, t_scene *scene)

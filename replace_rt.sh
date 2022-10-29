@@ -1,6 +1,6 @@
 #!/bin/bash
-rt_dir='rt_scenes'
-fn="${rt_dir}/$1"
+rt_dir="$1"
+fn="${rt_dir}/$2"
 cat > $fn
 
 

@@ -4,11 +4,7 @@
 #include "shell.h"
 #include "render_scr.h"
 
-// we need the commands :
-// l, s, c, n, w, h, mv, rot, render
-// optional :
-// new, del, hl, print (p?), save (export rt)
-// note if new -> use mk_camscreen in parsing instead of main
+// commands: l, s, c, n, w, h, mv, rot, render
 
 void	init_shell_data(t_shell_data *t, t_parse *data, t_scr *scr)
 {
@@ -36,7 +32,11 @@ void	exe_line(char *line, t_shell_data *t)
 }
 
 // HOOK
-#define LCLICK 1
+#ifdef Linux
+# define RCLICK 2
+#else
+# define RCLICK 3 
+#endif
 
 int	minirt_shell_hook(int button, int x, int y, t_shell_data *t)
 {
@@ -44,7 +44,7 @@ int	minirt_shell_hook(int button, int x, int y, t_shell_data *t)
 
 	(void) x;
 	(void) y;
-	if (button != LCLICK)
+	if (button != RCLICK)
 		return (0);
 	line = get_next_line(0);
 	if (!line)
@@ -53,8 +53,4 @@ int	minirt_shell_hook(int button, int x, int y, t_shell_data *t)
 	free (line);
 	return (0);
 }
-//  for highlights
-// 	mlx_put_image_to_window(t->scr->mlx, t->scr->win, t->scr->imptr, 0, 0);
-// 	if (t->hl)
-// 		draw_highlight(t);
-#undef LCLICK
+#undef RCLICK

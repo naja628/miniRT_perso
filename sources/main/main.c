@@ -62,6 +62,7 @@ int	main(int ac, char **av)
 	ft_mk_camscreen(cam, (float) 700 / 1000);
 	first_render(&intel, cam, &scr);
 	init_shell_data(&sh_data, &intel, &scr);
+	printf("you are in miniRT's shell. view doc.txt for list of commands\n");
 	launch_mlx(&scr, &sh_data, &mem);
 	return (0);
 }
