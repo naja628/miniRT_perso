@@ -6,7 +6,7 @@
 /*   By: xle-boul <xle-boul@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 14:01:12 by najacque          #+#    #+#             */
-/*   Updated: 2022/10/29 14:42:56 by xle-boul         ###   ########.fr       */
+/*   Updated: 2022/10/29 15:19:12 by xle-boul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,9 @@ void	ft_mk_normal_map(t_normals *map, t_imdata *h, float maxh)
 	float	hdiff;
 
 	ft_init_map(map, h);
-	maxh *= map->h;
 	if (!map->data)
 		return ;
+	maxh *= map->h;
 	y = 0;
 	while (y < h->h)
 	{
