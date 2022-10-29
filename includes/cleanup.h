@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cleanup.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: najacque <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: xle-boul <xle-boul@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 14:01:48 by najacque          #+#    #+#             */
-/*   Updated: 2022/10/29 14:01:48 by najacque         ###   ########.fr       */
+/*   Updated: 2022/10/29 14:53:05 by xle-boul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ typedef struct s_mem
 	t_scene			*scene;
 	t_scr			*scr;
 }	t_mem;
-// 	t_bump_array	*bump_maps; // TODO maybe add this field (reuse bumps etc)
 
 int		ft_quit(t_mem *mem);
 int		ft_esc_exit_hook(int keycode, t_mem *mem);
