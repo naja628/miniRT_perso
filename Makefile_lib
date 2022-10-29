@@ -6,7 +6,7 @@
 #    By: xle-boul <xle-boul@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/24 23:28:49 by xle-boul          #+#    #+#              #
-#    Updated: 2022/10/28 23:17:35 by xle-boul         ###   ########.fr        #
+#    Updated: 2022/10/28 23:30:45 by xle-boul         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,14 +32,15 @@ CFLAGS := -Werror -Wall -Wextra
 ifeq ($(OS),Linux)
 	D_OS := -D LINUX
 	LIB_DIR := sources/mlx_linux
-	EXTRA_FLAGS := -lmlx -lXext -lX11 -lm
+	EXTRA_FLAGS := -L$(LIB_DIR) -lmlx -I$(LIB_DIR) -lXext -lX11 -lm
 else
 	D_OS := -D MAC 
 	LIB_DIR	:= sources/mlx
-	EXTRA_FLAGS	:= -lmlx -framework OpenGL -framework AppKit
+	EXTRA_FLAGS	:= -L$(LIB_DIR) -lmlx -I$(LIB_DIR) -framework OpenGL -framework AppKit
 endif
 
-INCLUDES := -I includes/
+INCLUDES := -I includes -I$(LIB_DIR)
+LIB := $(LIB_DIR)/libmlx.a
 
 SRC_DIR := sources
 
@@ -47,12 +48,10 @@ OBJ_DIR := objs
 OBJ_DIR_BONUS := objs_bonus
 
 EXCL_BONUS := $(wildcard $(SRC_DIR)/bonus/*.c)
-EXCL_BASE := $(SRC_DIR)/parsing/read_data_hub.c $(SRC_DIR)/parsing/read_shapes.c $(SRC_DIR)/parsing/parsing.c $(SRC_DIR)/parsing/error_handler.c
-
+EXCL_BASE := $(SRC_DIR)/parsing/read_data_hub.c $(SRC_DIR)/parsing/read_shapes.c $(SRC_DIR)/parsing/parsing.c $(SRC_DIR)/parsing/error_handler.c $(SRC_DIR)/ray_tracing/render1.c $(SRC_DIR)/parsing/read_basics.c $(SRC_DIR)/parsing/validate.c 
 #
 # INSERT HERE THE NAMES OF THE FOLDERS INTO SOURCES THAT YOU WANT TO COMPILE
 #
-
 SUB_DIRS := parsing gnl ray_tracing main shell bonus
 
 SOURCEDIRS := $(foreach dir, $(SUB_DIRS), $(addprefix $(SRC_DIR)/, $(dir)))
@@ -75,12 +74,12 @@ all: $(NAME)
 
 bonus: $(BONUS)
 
-$(NAME): $(OBJ_FILES)
-	@printf "$(YELLOW)Linking $@...\n\n$(END)"
+$(NAME): $(LIB) $(OBJ_FILES)
+	@printf "$(YELLOW)Linking miniRT...\n\n$(END)"
 	$(CC) $(CFALGS) $(OBJ_FILES) -o $@ $(INCLUDES) $(EXTRA_FLAGS) -lm
-	@printf "\n$(GREEN)$@ compiled.\n$(END)"
+	@printf "\n$(GREEN)miniRT compiled.\n$(END)"
 
-$(BONUS): $(OBJ_FILES_BONUS)
+$(BONUS): $(LIB) $(OBJ_FILES_BONUS)
 	@printf "$(YELLOW)Linking $@...\n\n$(END)"
 	$(CC) $(CFALGS) $(OBJ_FILES_BONUS) -o $@ $(INCLUDES) $(EXTRA_FLAGS) -lm
 	@printf "\n$(GREEN)$@ compiled.\n$(END)"
@@ -97,16 +96,23 @@ $(OBJ_DIR_BONUS)/%.o : %.c
 	$(CC) $(CFLAGS) $(INCLUDES) $(D_OS) -Imlx -c -o $@ $<
 	@printf "$(GREEN)Object $(UNDERLINE)$(WHITE)$(notdir $@)$(END)$(GREEN) successfully compiled\n\n$(END)"
 
+$(LIB):
+	@printf "$(YELLOW)Compiling $(LIB)...\n$(END)"
+	cd $(LIB_DIR) && make
+	@printf "$(GREEN)$(LIB) compiled\n\n$(END)"
+
 clean:
 	@printf "$(YELLOW)Removing objects...\n$(END)"
 	$(RM) $(OBJ_DIR)
 	$(RM) $(OBJ_DIR_BONUS)
+	cd $(LIB_DIR) && make clean
 	@printf "$(GREEN)Objects removed!\n\n$(END)"
 
 fclean: clean
-	@printf "$(YELLOW)Removing objects and miniRT executable...\n$(END)"
+	@printf "$(YELLOW)Removing objects, miniLibX and miniRT executable...\n$(END)"
 	$(RM) $(NAME)
 	$(RM) $(BONUS)
+	$(RM) $(LIB)
 	@printf "$(GREEN)All clean!\n\n$(END)"
 
 re: fclean all
