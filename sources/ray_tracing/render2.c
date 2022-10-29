@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: najacque <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: xle-boul <xle-boul@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 14:01:28 by najacque          #+#    #+#             */
-/*   Updated: 2022/10/29 14:01:28 by najacque         ###   ########.fr       */
+/*   Updated: 2022/10/29 14:44:37 by xle-boul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,6 @@ t_vec	ft_flare(t_hit *hit, t_line *ray, t_light *light)
 	t_vec	to_light;
 	float	cos;
 
-	/* this function doesn't properly account for cases where a light is 
-	 * enclosed within an object 
-	 * possible solution: check for intersections with shapes on the path to the
-	 * light, note that this isn't exactly what we want either and is quite
-	 * computationally expensive
-	 * other solution: make it possible for the user to make certain lights 
-	 * not have flares (better I think?) */
 	if (light->no_flare)
 		return (ft_vec(0, 0, 0));
 	to_light = ft_diff(light->pos, ray->p);
@@ -47,7 +40,6 @@ t_vec	ft_flare(t_hit *hit, t_line *ray, t_light *light)
 		ft_make_unit(&to_light);
 		cos = ft_dot(ray->dir, to_light);
 		if (cos > 0)
-			// oversaturate ? cool when lights has color (whiter near center) 
 			return (ft_scaled(ft_fastexp(cos, 1024) * 1.25, light->color));
 	}
 	return (ft_vec(0, 0, 0));

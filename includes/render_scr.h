@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   render_scr.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: najacque <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: xle-boul <xle-boul@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 14:36:01 by najacque          #+#    #+#             */
-/*   Updated: 2022/10/29 14:36:01 by najacque         ###   ########.fr       */
+/*   Updated: 2022/10/29 14:39:19 by xle-boul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef RENDER_SCR_H 
+#ifndef RENDER_SCR_H
 # define RENDER_SCR_H
 
 # include "camera.h"

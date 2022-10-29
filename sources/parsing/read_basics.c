@@ -6,12 +6,11 @@
 /*   By: xle-boul <xle-boul@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 22:32:47 by xle-boul          #+#    #+#             */
-/*   Updated: 2022/10/27 22:46:59 by xle-boul         ###   ########.fr       */
+/*   Updated: 2022/10/29 14:40:41 by xle-boul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
-
 
 int	read_ambient_light(t_parse *intel, char *line)
 {

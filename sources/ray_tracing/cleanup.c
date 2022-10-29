@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cleanup.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: najacque <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: xle-boul <xle-boul@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 14:01:16 by najacque          #+#    #+#             */
-/*   Updated: 2022/10/29 14:01:16 by najacque         ###   ########.fr       */
+/*   Updated: 2022/10/29 14:43:12 by xle-boul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,6 @@ int	ft_quit(t_mem *mem)
 	ft_free_lights(mem->scene->lights);
 	mlx_destroy_window(mem->scr->mlx, mem->scr->win);
 	mlx_destroy_image(mem->scr->mlx, mem->scr->imptr);
-#ifdef Linux // causes crashes on Mac
-	mlx_destroy_display(mem->scr->mlx);
-#endif
 	exit(0);
 }
 

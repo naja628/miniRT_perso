@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell_cmds2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: najacque <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: xle-boul <xle-boul@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 14:01:41 by najacque          #+#    #+#             */
-/*   Updated: 2022/10/29 14:01:41 by najacque         ###   ########.fr       */
+/*   Updated: 2022/10/29 14:45:37 by xle-boul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	cmd_mv(t_shell_data *t)
 	int		error;
 
 	error = 0;
-	if (!(t->mv_p)) // never happens?
+	if (!(t->mv_p))
 		return (printf("element cannot be moved\n"));
 	motion = read_vec(&(t->args_line), &error);
 	if (!error)
@@ -57,7 +57,7 @@ int	cmd_render(t_shell_data *t)
 
 int	cmd_ppos(t_shell_data *t)
 {
-	t_vec p;
+	t_vec	p;
 
 	if (!(t->mv_p))
 		return (printf("Nothing selected\n"));

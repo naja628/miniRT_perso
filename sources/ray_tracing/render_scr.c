@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_scr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: najacque <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: xle-boul <xle-boul@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 14:01:29 by najacque          #+#    #+#             */
-/*   Updated: 2022/10/29 14:01:29 by najacque         ###   ########.fr       */
+/*   Updated: 2022/10/29 14:44:53 by xle-boul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ static t_vec	ft_avg_samples(int n, t_vec2 *smp, t_camera *cam, t_scene *sce)
 		++i;
 	}
 	ft_scale(1.0 / n, &vrgb);
-	// no gamma?
 	ft_gamma_correct(&vrgb);
 	return (vrgb);
 }

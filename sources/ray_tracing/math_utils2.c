@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   math_utils2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: najacque <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: xle-boul <xle-boul@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 14:01:25 by najacque          #+#    #+#             */
-/*   Updated: 2022/10/29 14:01:25 by najacque         ###   ########.fr       */
+/*   Updated: 2022/10/29 14:43:41 by xle-boul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,3 @@ int	ft_same_side(t_vec n, t_vec u, t_vec v)
 {
 	return (ft_dot(n, u) * ft_dot(v, u) > 0);
 }
-

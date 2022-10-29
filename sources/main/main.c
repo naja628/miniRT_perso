@@ -6,7 +6,7 @@
 /*   By: xle-boul <xle-boul@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 17:44:45 by xle-boul          #+#    #+#             */
-/*   Updated: 2022/10/28 21:22:11 by xle-boul         ###   ########.fr       */
+/*   Updated: 2022/10/29 14:40:28 by xle-boul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	first_render(t_parse *intel, t_camera *cam, t_scr *scr)
 }
 
 #define QUIT_EVENT 17
+
 static void	launch_mlx(t_scr *scr, t_shell_data *sh_data, t_mem *mem)
 {
 	mlx_mouse_hook(scr->win, minirt_shell_hook, sh_data);
@@ -34,6 +35,7 @@ static void	launch_mlx(t_scr *scr, t_shell_data *sh_data, t_mem *mem)
 	mlx_hook(scr->win, QUIT_EVENT, 0, ft_quit, mem);
 	mlx_loop(scr->mlx);
 }
+
 #undef QUIT_EVENT
 
 // cam is a pointer because it needs to be the same as the one

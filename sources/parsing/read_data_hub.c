@@ -6,7 +6,7 @@
 /*   By: xle-boul <xle-boul@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 23:03:04 by xle-boul          #+#    #+#             */
-/*   Updated: 2022/10/28 23:09:22 by xle-boul         ###   ########.fr       */
+/*   Updated: 2022/10/29 14:41:16 by xle-boul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ int	id_match(char *linestart, char *id, size_t id_len)
 {
 	char	after;
 
-	// TODO problem if line shorter than id
 	if (ft_strlen(linestart) < id_len)
 		return (0);
 	after = linestart[id_len];

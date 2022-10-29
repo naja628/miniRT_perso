@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: najacque <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: xle-boul <xle-boul@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 14:01:17 by najacque          #+#    #+#             */
-/*   Updated: 2022/10/29 14:01:17 by najacque         ###   ########.fr       */
+/*   Updated: 2022/10/29 14:46:35 by xle-boul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ void	ft_adjust_for_gamma(t_scene *sce)
 	itl = sce->lights;
 	while (itl)
 	{
-// 		itl->light.intensity *= itl->light.intensity;
 		color = &(itl->light.color);
 		*color = ft_vec_mult(*color, *color);
 		itl = itl->next;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell_rot.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: najacque <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: xle-boul <xle-boul@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 14:01:43 by najacque          #+#    #+#             */
-/*   Updated: 2022/10/29 14:01:43 by najacque         ###   ########.fr       */
+/*   Updated: 2022/10/29 14:45:58 by xle-boul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void	rot_basis(t_vec *u, int iaxis)
 
 static void	rot(t_vec *u, int iaxis, float theta)
 {
-	theta = -theta; // why are rotations the wrong way around??
+	theta = -theta;
 	rot_basis(u, iaxis);
 	*u = rot_x(*u, theta);
 	rot_basis(u, -iaxis);
