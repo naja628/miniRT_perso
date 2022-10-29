@@ -13,8 +13,6 @@ t_vec	ft_diffuse(t_hit *hit, t_light *light)
 
 	to_light = ft_diff(light->pos, hit->p);
 	lum = light->intensity;
-	/* TODO handle intensity thingy
- 	lum /= ft_sqnorm(to_light) / 30; */
 	ft_make_unit(&to_light);
 	lum *= fabs(ft_dot(to_light, hit->n));
 	color = ft_color(hit->p, hit->sh);
@@ -37,7 +35,6 @@ t_vec	ft_specular(t_hit *hit, t_vec incident, t_light *light, int alpha)
 		return (ft_vec(0, 0, 0));
 }
 
-// TODO bug thingy when (eg) inside objects
 static t_vec	ft_flares(t_hit *hit, t_line *ray, t_light_list *lights)
 {
 	t_vec	color;

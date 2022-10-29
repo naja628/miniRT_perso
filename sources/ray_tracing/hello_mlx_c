@@ -134,27 +134,27 @@ static int ft_pixel_color(int x, int y, int scr_w, t_scene *sce, t_camera *cam)
 	// hardcode list with two sphere
 
 	// scene 1 (planetes, maybe undo 'Xmas' lights)
-// 	t_vec	lightpos = ft_vec(4, 1.8, 0);
-// 	t_sphere sp = {ft_vec(0, 3, 0), 1};
-// 	t_sphere sp2 = {ft_vec(-4.5, 3, 0), 3};
-// 	t_sphere sp3 = {ft_vec(0, 4, 1.5), 0.8};
-// 	struct s_shape_list one = {{SHP_SPHERE, ft_color_vec(0x80ff), SHINY, &sp}, NULL};
-// 	struct s_shape_list two = {{SHP_SPHERE, ft_color_vec(0x8000ff), SHINY, &sp3}, &one};
-// 	struct s_shape_list objs = {{SHP_SPHERE, ft_color_vec(0xff8000), SHINY, &sp2}, &two};
-// 	t_light_list li1 = {{lightpos, 0.7, {1, 0.10, 0.10}}, NULL};
-// 	t_light_list lights = {{ft_vec(3, 4.5, 4), 0.7, {0.10, 1, 0.10}}, &li1};
-// 	t_scene scene = {0.07, &lights, &objs};
-// 	t_scene scene = {0.03, {lightpos, 1}, &objs};
+	t_vec	lightpos = ft_vec(4, 1.8, 0);
+	t_sphere sp = {ft_vec(0, 3, 0), 1};
+	t_sphere sp2 = {ft_vec(-4.5, 3, 0), 3};
+	t_sphere sp3 = {ft_vec(0, 4, 1.5), 0.8};
+	struct s_shape_list one = {{SHP_SPHERE, ft_color_vec(0x80ff), SHINY, &sp}, NULL};
+	struct s_shape_list two = {{SHP_SPHERE, ft_color_vec(0x8000ff), SHINY, &sp3}, &one};
+	struct s_shape_list objs = {{SHP_SPHERE, ft_color_vec(0xff8000), SHINY, &sp2}, &two};
+	t_light_list li1 = {{lightpos, 0.7, {1, 0.10, 0.10}}, NULL};
+	t_light_list lights = {{ft_vec(3, 4.5, 4), 0.7, {0.10, 1, 0.10}}, &li1};
+	t_scene scene = {0.07, &lights, &objs};
+	t_scene scene = {0.03, {lightpos, 1}, &objs};
 
 	// scene 2 (with plane and intersections)
-// 	t_sphere sp = {ft_vec(0, 3, -2), 1.5};
-// 	t_sphere sp2 = {ft_vec(2, 15, -2), 1.5};
-// 	t_plane pl = {ft_vec(0, 0, -2), ft_vec(0, 0, 1)};
-// // 	struct s_shape_list xxx = {{xxx, ft_color_vec(xxx), &xxx}, xxx};
-// 	struct s_shape_list one = {{SHP_PLANE, ft_color_vec(0x8000ff), SHINY, &pl}, NULL};
-// 	struct s_shape_list two = {{SHP_SPHERE, ft_color_vec(0xff), SHINY, &sp2}, &one};
-// 	struct s_shape_list objs = {{SHP_SPHERE, ft_color_vec(0xff0000), SHINY, &sp}, &two};
-// 	t_scene scene = {0.05, {ft_vec(1.5, 3, 2), 0.7, WHITE}, &objs};
+	t_sphere sp = {ft_vec(0, 3, -2), 1.5};
+	t_sphere sp2 = {ft_vec(2, 15, -2), 1.5};
+	t_plane pl = {ft_vec(0, 0, -2), ft_vec(0, 0, 1)};
+// 	struct s_shape_list xxx = {{xxx, ft_color_vec(xxx), &xxx}, xxx};
+	struct s_shape_list one = {{SHP_PLANE, ft_color_vec(0x8000ff), SHINY, &pl}, NULL};
+	struct s_shape_list two = {{SHP_SPHERE, ft_color_vec(0xff), SHINY, &sp2}, &one};
+	struct s_shape_list objs = {{SHP_SPHERE, ft_color_vec(0xff0000), SHINY, &sp}, &two};
+	t_scene scene = {0.05, {ft_vec(1.5, 3, 2), 0.7, WHITE}, &objs};
 
 	// scene 3 (mirrors)
 // 	t_sphere sp = {ft_vec(0, 2, 1), 1};
@@ -167,19 +167,19 @@ static int ft_pixel_color(int x, int y, int scr_w, t_scene *sce, t_camera *cam)
 // 	t_scene scene = {0.10, &light, &objs};
 
 	// scene 4 (bi-color)
-// 	t_sphere sp1 = {ft_vec(-1.5, 1, -1), 1};
-// 	t_sphere sp2 = {ft_vec(1.5, 1, -1), 1};
-// 	t_plane wall = {ft_vec(0, 4, 0), ft_vec(0, 1, 0)};
-// // 	t_plane floor = {ft_vec(0, -2, 0), ft_vec(0, 0, 1)};
-// 	t_plane floor = {ft_vec(0, 0, -2), ft_vec(0, 0, 1)};
-// 	t_shape_list one = {{SHP_SPHERE, ft_color_vec(0x808080), 0, SHINY, &sp1}, NULL};
-// 	t_shape_list two = {{SHP_SPHERE, ft_color_vec(0x0050ff), 1, MATTE, &sp2}, &one};
-// 	t_shape_list three = {{SHP_PLANE, ft_color_vec(0xa0a0a0), 1, MATTE, &wall}, &two};
-// 	t_shape_list objs = {{SHP_PLANE, ft_color_vec(0xa0a0a0), 0, SHINY, &floor}, &three};
-// 	//
-// 	t_light_list li1 = {{ft_vec(-3.5, -1, 0), 0.7, {1, 0.5, 0}}, NULL};
-// 	t_light_list lights = {{ft_vec(3.5, -1, 0), 0.7, {0, 0.5, 1}}, &li1};
-// 	t_scene scene = {0.15, &lights, &objs};
+	t_sphere sp1 = {ft_vec(-1.5, 1, -1), 1};
+	t_sphere sp2 = {ft_vec(1.5, 1, -1), 1};
+	t_plane wall = {ft_vec(0, 4, 0), ft_vec(0, 1, 0)};
+// 	t_plane floor = {ft_vec(0, -2, 0), ft_vec(0, 0, 1)};
+	t_plane floor = {ft_vec(0, 0, -2), ft_vec(0, 0, 1)};
+	t_shape_list one = {{SHP_SPHERE, ft_color_vec(0x808080), 0, SHINY, &sp1}, NULL};
+	t_shape_list two = {{SHP_SPHERE, ft_color_vec(0x0050ff), 1, MATTE, &sp2}, &one};
+	t_shape_list three = {{SHP_PLANE, ft_color_vec(0xa0a0a0), 1, MATTE, &wall}, &two};
+	t_shape_list objs = {{SHP_PLANE, ft_color_vec(0xa0a0a0), 0, SHINY, &floor}, &three};
+	//
+	t_light_list li1 = {{ft_vec(-3.5, -1, 0), 0.7, {1, 0.5, 0}}, NULL};
+	t_light_list lights = {{ft_vec(3.5, -1, 0), 0.7, {0, 0.5, 1}}, &li1};
+	t_scene scene = {0.15, &lights, &objs};
 
 	// scene 5 (insde sphere)
 // 	t_sphere outer = {ft_vec(0, 0, 0), 6};

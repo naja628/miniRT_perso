@@ -27,7 +27,7 @@ void	*read_cone(char **line, int *ret)
 	cn->p = read_vec(line, ret);
 	*line = skip_spaces(*line);
 	cn->dir = read_vec(line, ret);
-	want_unit(cn->dir, ret);
+	want_unit_bonus(&(cn->dir), ret);
 	*line = skip_spaces(*line);
 	cn->slope = ft_atof_minirt(line, ret);
 	want_positive(cn->slope, ret);

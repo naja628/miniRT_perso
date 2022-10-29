@@ -46,7 +46,11 @@ int	ft_xpm_to_normals(void *mlx, t_normals *map, char *fn, float maxh)
 
 	errcode = ft_xpm_to_imdata(mlx, fn, &imdata, &img_to_del);
 	if (errcode == 0)
+	{
 		ft_mk_normal_map(map, &imdata, maxh);
+		if (!map->data)
+			return (E_XPM_MALLOC);
+	}
 	else
 		map->data = NULL;
 	mlx_destroy_image(mlx, img_to_del);

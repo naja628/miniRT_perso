@@ -110,31 +110,58 @@ rt_dir='rt_scenes'
 new_rt='./new_rt.sh'
 replace_rt='./replace_rt.sh' # useful for debug
 
-$replace_rt mirror.rt << HD 
-A	0.07		$white
-C	6,-6,0	`unit -2 2 0`	70
-L	1,-1,3	0.6	$white	
+$new_rt mirror.rt << SCENE 
+A	0.15	$white
+C	6,-6,0	`unit -1 1 0`	70
+
+L	1,-1,3	3		$white	
+
 pl	-2,0,0  $x		$blue		$mirror 0
 pl	0,2,0	$negy	$white		$shiny	1
 sp	$zero	2		$raspberry 	$shiny 0
-HD
+SCENE
 
-$replace_rt lampshade.rt << HD
-A	0.07	$white
+$new_rt lampshade.rt << SCENE
+A	0.3		$white
 C	0,-10,0 `unit -1 4 -1` 	70
-L	-1,0,-1	0.7	$yellowish
-L	0,0,30  0.3 $blueish
-cn  $zero `unit -1 -0.4 -1` 0.75 2 $purple $shiny 0
-pl  0,0,-3 $z 					$grey $shiny 1
-HD
+L	-1,0,-1	6	$yellowish
+# adding this light allows the cone to not look flat
+L	0,0,30  20  $blueish
+cn  $zero `unit -1 -0.4 -1` 1 2 	$purple $shiny 0
+pl  0,0,-3 $z 						$grey $polish 1
+SCENE
 
 bonus="0.5 0.2 0.3 0 xpm_height_maps/rough_stripes.xpm $pi"
-$replace_rt cn_sp_cy.rt << HD
-A 0.07               $white
-C 0,-10,0          0,1,0           70
-L 0,0,3         0.7             $white
+$new_rt cn_sp_cy.rt << SCENE
+A 0.15			$white
+C 0,-10,0		0,1,0           70
+L 0,0,3         2.5             $white
 # test comment
+
+cn	-2.5,0,0    0,0,-1   0.5 `cn_ht 0.5 $pi`   255,0,128 $bonus
 sp	0,0,0           2              			   190,255,0 $bonus
 cy	2.5,0,0  	 0,0,1  2   3    			   64,0,255 $bonus
-cn	-2.5,0,0    0,0,-1   0.5 `cn_ht 0.5 $pi`   255,0,128 $bonus
-HD
+
+SCENE
+
+$new_rt spheres.rt << SCENE
+A	0.10			$white
+C	7.5,-4.5,0		`unit -1 1 0`	55
+L	5,2,0		6	$yellowish
+sp	0,3,0		2	$turquoise $matte
+sp	-4.5,3,0	6	$orange	$polish
+sp	0,4,1.5		1.6	$purple	$polish
+SCENE
+
+$new_rt bicolor.rt << SCENE
+A	0.2			$white
+C	0,-8,0		$y	55
+L	-3.5,-1,0	8	$orange
+L	3.5,-1,0	8	$turquoise
+sp	-1.5,1,-1	2	0,50,255	$shiny
+sp	1.5,1,-1	2	$white 		$matte 1
+pl	0,4,0		$y	$grey		$shiny 0
+pl	0,0,-2		$z	$white		$matte 1
+SCENE
+
+

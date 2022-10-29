@@ -17,6 +17,7 @@ typedef struct s_normals
 
 # define E_LOADING 1
 # define E_NOT32 2
+# define E_XPM_MALLOC 3
 
 int		ft_xpm_to_imdata(void *mlx, char *fn, t_imdata *buff, void **delme);
 void	ft_mk_normal_map(t_normals *map, t_imdata *heights, float maxh);
@@ -28,6 +29,7 @@ void	ft_mk_normal_map(t_normals *map, t_imdata *heights, float maxh);
 // 	0 if ok
 // 	1=E_LOADING if error loading file
 // 	2=E_NOT32 if native color format not supported
+// 	3=E_XPM_MALLOC if bad alloc
 int		ft_xpm_to_normals(void *mlx, t_normals *map, char *fn, float maxh);
 
 #endif

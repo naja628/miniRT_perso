@@ -12,7 +12,6 @@
 
 #include "parsing.h"
 
-// TODO pass error code to atoi and atof to prevent cases of error (no digit)
 
 int	read_ambient_light(t_parse *intel, char *line)
 {

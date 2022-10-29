@@ -18,7 +18,6 @@ int	id_match(char *linestart, char *id, size_t id_len)
 {
 	char	after;
 
-	// TODO problem if line shorter than id
 	if (ft_strlen(linestart) < id_len)
 		return (0);
 	after = linestart[id_len];

@@ -1,8 +1,7 @@
-* NOT DONE *
-parsing : 
-	set default material?
-progress info / logging
-make fun scenes + sh template
+scenes
+check no `want_unit` in non bonus files
+cam pointer thing
+new shell command print position
 
 * DONE *
 is bump mapping on the cone the wrong way around? (DONE, it was) 

@@ -123,6 +123,7 @@ int		want_bool(int boolean, int *berr);
 int		want_positive(float x, int *berr);
 int		want_ratio(float ratio, int *berr);
 int		want_unit(t_vec	unit, int *berr);
+int		want_unit_bonus(t_vec *unit, int *berr);
 int		set_if_zero(int *berr, int new_err);
 int		want_coefs(t_shape *s, int *berr);
 

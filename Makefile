@@ -48,8 +48,7 @@ OBJ_DIR := objs
 OBJ_DIR_BONUS := objs_bonus
 
 EXCL_BONUS := $(wildcard $(SRC_DIR)/bonus/*.c)
-EXCL_BASE := $(SRC_DIR)/parsing/read_data_hub.c $(SRC_DIR)/parsing/read_shapes.c $(SRC_DIR)/parsing/parsing.c $(SRC_DIR)/parsing/error_handler.c
-
+EXCL_BASE := $(SRC_DIR)/parsing/read_data_hub.c $(SRC_DIR)/parsing/read_shapes.c $(SRC_DIR)/parsing/parsing.c $(SRC_DIR)/parsing/error_handler.c $(SRC_DIR)/ray_tracing/render1.c $(SRC_DIR)/parsing/read_basics.c $(SRC_DIR)/parsing/validate.c 
 #
 # INSERT HERE THE NAMES OF THE FOLDERS INTO SOURCES THAT YOU WANT TO COMPILE
 #

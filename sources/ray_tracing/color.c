@@ -1,6 +1,7 @@
 #include <math.h>
 #include "utypes.h"
 #include "vec.h"
+#include "color.h"
 
 static float	ft_zero_to_one(float x)
 {
@@ -44,4 +45,31 @@ t_vec	ft_color_vec(int color)
 	vrgb.y = ((color & 0xff00) >> 8) / (float) 255;
 	vrgb.z = (color & 0xff) / (float) 255;
 	return (vrgb);
+}
+
+// tries to make so color and intensities are consistent with and without
+// gamme correction
+void	ft_adjust_for_gamma(t_scene *sce)
+{
+	t_shape_list	*its;
+	t_light_list	*itl;
+	t_vec			*color;
+
+	sce->ambient *= sce->ambient;
+	sce->ambient_color = ft_vec_mult(sce->ambient_color, sce->ambient_color);
+	itl = sce->lights;
+	while (itl)
+	{
+// 		itl->light.intensity *= itl->light.intensity;
+		color = &(itl->light.color);
+		*color = ft_vec_mult(*color, *color);
+		itl = itl->next;
+	}
+	its = sce->shapes;
+	while (its)
+	{
+		color = &(its->shape.color);
+		*color = ft_vec_mult(*color, *color);
+		its = its->next;
+	}
 }

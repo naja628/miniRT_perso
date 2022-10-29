@@ -78,7 +78,7 @@ void	*read_cylinder(char **line, int *ret)
 	cy->p = read_vec(line, ret);
 	*line = skip_spaces(*line);
 	cy->dir = read_vec(line, ret);
-	want_unit(cy->dir, ret);
+	want_unit_bonus(&(cy->dir), ret);
 	*line = skip_spaces(*line);
 	cy->r = ft_atof_minirt(line, ret) / 2;
 	want_positive(cy->r, ret);
@@ -103,6 +103,6 @@ void	*read_plane(char **line, int *ret)
 	pl->p = read_vec(line, ret);
 	*line = skip_spaces(*line);
 	pl->dir = read_vec(line, ret);
-	want_unit(pl->dir, ret);
+	want_unit_bonus(&(pl->dir), ret);
 	return ((t_plane *)pl);
 }

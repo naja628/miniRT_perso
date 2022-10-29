@@ -38,6 +38,9 @@ int	ft_quit(t_mem *mem)
 	ft_free_lights(mem->scene->lights);
 	mlx_destroy_window(mem->scr->mlx, mem->scr->win);
 	mlx_destroy_image(mem->scr->mlx, mem->scr->imptr);
+#ifdef Linux // causes crashes on Mac
+	mlx_destroy_display(mem->scr->mlx);
+#endif
 	exit(0);
 }
 
