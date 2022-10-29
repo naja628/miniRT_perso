@@ -28,3 +28,9 @@ void	ft_para_perp(t_vec dir, t_vec decomped, t_vec *para, t_vec *perp)
 	if (perp)
 		*perp = ft_diff(decomped, *para_addr);
 }
+
+int	ft_same_side(t_vec n, t_vec u, t_vec v)
+{
+	return (ft_dot(n, u) * ft_dot(v, u) > 0);
+}
+

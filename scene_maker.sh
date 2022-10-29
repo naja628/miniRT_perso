@@ -153,12 +153,12 @@ sp	-4.5,3,0	6	$orange	$polish
 sp	0,4,1.5		1.6	$purple	$polish
 SCENE
 
-$new_rt bicolor.rt << SCENE
+$replace_rt bicolor.rt << SCENE
 A	0.2			$white
 C	0,-8,0		$y	55
 L	-3.5,-1,0	8	$orange
 L	3.5,-1,0	8	$turquoise
-sp	-1.5,1,-1	2	0,50,255	$shiny
+sp	-1.5,1,-1	2	0,100,255	$shiny
 sp	1.5,1,-1	2	$white 		$matte 1
 pl	0,4,0		$y	$grey		$shiny 0
 pl	0,0,-2		$z	$white		$matte 1

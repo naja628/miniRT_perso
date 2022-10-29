@@ -13,7 +13,7 @@ t_vec	ft_diffuse(t_hit *hit, t_light *light)
 
 	to_light = ft_diff(light->pos, hit->p);
 	lum = light->intensity;
- 	lum /= ft_sqnorm(to_light);
+	lum /= ft_sqnorm(to_light);
 	ft_make_unit(&to_light);
 	lum *= fabs(ft_dot(to_light, hit->n));
 	color = ft_color(hit->p, hit->sh);
@@ -90,8 +90,9 @@ t_vec	ft_ray_color(t_line	*ray, t_scene *sce, int bounces, float thresh)
 		coef = hit.sh->refl_coef;
 		reflected.dir = ft_reflect(ray->dir, hit.n);
 		reflected.p = ft_vec_add(hit.p, ft_scaled(0.01, reflected.dir));
-// 		if (ft_dot(reflected.dir, ft_normal(hit.p, hit.sh)) < 0)
-// 			return (color);
+		if (hit.sh->bump_map
+			&& ft_same_side(ft_normal(hit.p, hit.sh), reflected.dir, ray->dir))
+			return (color);
 		refl_color = ft_ray_color(&reflected, sce, bounces - 1, coef * thresh);
 		ft_add_to(&color, ft_scaled(coef, refl_color));
 	}

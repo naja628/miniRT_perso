@@ -36,4 +36,9 @@ void	ft_para_perp(t_vec dir, t_vec decomped, t_vec *para, t_vec *perp);
 // fast exponentiaton (of float to an integer power)
 float	ft_fastexp(float x, int pow);
 
+// predicate:
+// u, and v are in the same side of the plane passing through 0 with 
+// normal n
+int		ft_same_side(t_vec n, t_vec u, t_vec v);
+
 #endif
