@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render1.c                                          :+:      :+:    :+:   */
+/*   render1_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: najacque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/29 14:01:27 by najacque          #+#    #+#             */
-/*   Updated: 2022/10/29 14:01:27 by najacque         ###   ########.fr       */
+/*   Created: 2022/10/29 14:00:21 by najacque          #+#    #+#             */
+/*   Updated: 2022/10/29 14:00:25 by najacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ t_vec	ft_diffuse(t_hit *hit, t_light *light)
 
 	to_light = ft_diff(light->pos, hit->p);
 	lum = light->intensity;
+	lum /= ft_sqnorm(to_light);
 	ft_make_unit(&to_light);
 	lum *= fabs(ft_dot(to_light, hit->n));
 	color = ft_color(hit->p, hit->sh);

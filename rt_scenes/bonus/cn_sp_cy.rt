@@ -1,8 +1,0 @@
-A 0.15			255,255,255
-C 0,-10,0		0,1,0           70
-L 0,0,3         2.5             255,255,255
-# test comment
-cn	-2.5,0,0    0,0,-1   0.5 2.80994   255,0,128 0.5 0.2 0.3 0 xpm_height_maps/rough_stripes.xpm 3.1416
-sp	0,0,0           2              			   190,255,0 0.5 0.2 0.3 0 xpm_height_maps/rough_stripes.xpm 3.1416
-cy	2.5,0,0  	 0,0,1  2   3    			   64,0,255 0.5 0.2 0.3 0 xpm_height_maps/rough_stripes.xpm 3.1416
-

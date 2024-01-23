@@ -39,7 +39,7 @@ render -> apply changes and render the image (not automatic)
 
 optional arguments in brackets ([])
 
-light decalartions :
+light declartions :
 L <pos> <intensity> <color> [no_flare]
 	<intensity> can be any positive float.
 		It represents the distance at which objects hit straight-on by the light
@@ -48,7 +48,7 @@ L <pos> <intensity> <color> [no_flare]
 	You can have several lights.
 
 shape declarations :
-<id> <shape_specific_args> <color> [<diff_coef> <spec_coef> <refl_coef> \
+<shape_type> <shape_specific_args> <color> [<diff_coef> <spec_coef> <refl_coef> \
 <checker> <bump_map> <bump_map_height>]
 	You can use the coefs to give a different feel to the material of the shape.
 	All coef between 0 and 1 (sum must be < 1).

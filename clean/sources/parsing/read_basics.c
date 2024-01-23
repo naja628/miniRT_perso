@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   read_basics.c                                      :+:      :+:    :+:   */
+/*   read_basics_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: xle-boul <xle-boul@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 22:32:47 by xle-boul          #+#    #+#             */
-/*   Updated: 2022/10/29 14:40:41 by xle-boul         ###   ########.fr       */
+/*   Updated: 2022/10/29 14:40:08 by xle-boul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	read_camera(t_parse *intel, char *line)
 	intel->cam.viewpoint = read_vec(&line, &ret);
 	line = skip_spaces(line);
 	intel->cam.dir = read_vec(&line, &ret);
-	want_unit(intel->cam.dir, &ret);
+	want_unit_bonus(&(intel->cam.dir), &ret);
 	line = skip_spaces(line);
 	intel->cam.fov_deg = ft_atoi_minirt(&line, &ret);
 	if (!ret && !(0 < intel->cam.fov_deg && intel->cam.fov_deg < 180))
@@ -62,7 +62,7 @@ int	read_light(t_parse *intel, char *line)
 	new->light.pos = read_vec(&line, &ret);
 	line = skip_spaces(line);
 	new->light.intensity = ft_atof_minirt(&line, &ret);
-	want_ratio(new->light.intensity, &ret);
+	want_positive(new->light.intensity, &ret);
 	line = skip_spaces(line);
 	new->light.color = read_color(&line, &ret);
 	if (eol_checker(&line) == 0)

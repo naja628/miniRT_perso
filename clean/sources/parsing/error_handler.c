@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_handler.c                                    :+:      :+:    :+:   */
+/*   error_handler_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: xle-boul <xle-boul@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 21:44:11 by xle-boul          #+#    #+#             */
-/*   Updated: 2022/10/29 13:55:24 by xle-boul         ###   ########.fr       */
+/*   Updated: 2022/10/29 13:55:13 by xle-boul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,40 +16,40 @@ void	print_error(int error, char *line)
 {
 	if (!error)
 		return ;
-	printf("Error\n");
+	dprintf(2, "Error\n");
 	if (line)
-		printf("On line: %s", line);
+		dprintf(2, "On line: %s", line);
 	if (error == COMMA_SEP)
-		printf("Expected comma\n");
+		dprintf(2, "Expected comma\n");
 	else if (error == TRAILING_CHARS)
-		printf("Trailings chars\n");
+		dprintf(2, "Trailings chars\n");
 	else if (error == WRONG_VALUE || error == DIR_NOT_UNIT)
-		printf("Invalid argument\n");
+		dprintf(2, "Invalid argument\n");
 	else if (error == EXPECTED_NUMBER)
-		printf("Expected number\n");
+		dprintf(2, "Expected number\n");
 	else if (error == UNKNOWN_ID)
-		printf("Unknow identifier at start of line\n");
+		dprintf(2, "Unknow identifier at start of line\n");
 	else if (error == MALLOC_ERR)
-		printf("Bad alloc. Are you out of RAM?\n");
+		dprintf(2, "Bad alloc. Are you out of RAM?\n");
 	else if (error == XPM_READ)
-		printf("Failed to read xpm. Expected ... <valid_xpm> <map_height>\n");
+		dprintf(2, "Failed to read xpm. Expected... <valid_xpm> <map_height>\n");
 	else if (error == READ_FILE_ERR)
-		printf("Could not open .rt file\n");
+		dprintf(2, "Could not open .rt file\n");
 	else if (error == UNIQUE_ELEM)
-		printf("Unique elements must be defined exactly once\n");
+		dprintf(2, "Unique elements must be defined exactly once\n");
 }
 
 int	error_handler(int error)
 {
 	if (error == MALLOC_ERR)
-		printf("Error!\nMalloc failed\n");
+		dprintf(2, "Error!\nMalloc failed\n");
 	else if (error == FILE_EXT_ERR)
-		printf("Error!\nFile extension must be .rt\n");
+		dprintf(2, "Error!\nFile extension must be .rt\n");
 	else if (error == READ_FILE_ERR)
-		printf("Error!\nCould not read file\n");
+		dprintf(2, "Error!\nCould not read file\n");
 	else if (error == INVALID_DATA_ERR)
-		printf("Error!\nData provided is corrupted\n");
+		dprintf(2, "Error!\nData provided is corrupted\n");
 	else if (error == ARGUMENTS_ERR)
-		printf("Error!\nWrong number of arguments\n");
+		dprintf(2, "Error!\nWrong number of arguments\n");
 	exit(EXIT_FAILURE);
 }
