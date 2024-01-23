@@ -10,11 +10,11 @@ Key features include:
 * bump mapping
 
 ## Gallery
-[box](gallery/box.png)
-[mirror](gallery/mirror.png)
-[bicolor](gallery/bicolor.png)
-[lampshade](gallery/lampshade.png)
-[earth](TODO)
+![box](gallery/box.png)
+![mirror](gallery/mirror.png)
+![bicolor](gallery/bicolor.png)
+![lampshade](gallery/lampshade.png)
+![earth](TODO)
 
 ## A Note about mlx
 _mlx_ (short for _minilibX_) is a Graphics/Events Library that provides simple C binding
