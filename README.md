@@ -53,7 +53,7 @@ Camera declaration (exactly 1 required) :
 C <pos> <direction> <fov-in-degrees>
 	<direction> must be a vector with a norm of 1
 
-Ambeint Light declaration (exactly 1 required) :
+Ambient Light declaration (exactly 1 required) :
 A <intensity> <color>
 
 Light declarations :
@@ -82,7 +82,7 @@ Shape declarations :
 Where the <shape-type> <shape-args> part is one of:
 	sp <center> <radius>
 	pl <origin> <normal>
-	cn <bottom-center> <direction> <radius> <length>
-	cy <vertex> <direction> <radius-at-1-unit-distance> <length>
+	cn <bottom-center> <direction> <diameter> <length>
+	cy <vertex> <direction> <diameter-at-1-unit-distance> <length>
 
 ```
