@@ -51,41 +51,40 @@ a specific argument you also to specify all those that precede it.
 * colors are r,g,b using ints in [0, 255]
 
 Declaration can be one of:
-```
-Camera declaration (exactly 1 required) :
-C <pos> <direction> <fov-in-degrees>
-	<direction> must be a vector with a norm of 1
+
+Camera declaration (exactly 1 required):  
+`C <pos> <direction> <fov-in-degrees>`
+* `<direction>` must be a vector with a norm of 1
 
 Ambient Light declaration (exactly 1 required) :
-A <intensity> <color>
+`A <intensity> <color>`
+* `<intensity>` in [0.0, 1.0]
 
 Light declarations :
-L <pos> <intensity> <color> [not-visible]
-	<intensity> can be any positive float.
-		It represents the distance at which objects hit straight-on by the light
-		have 100% of their color.
-	<not-visible> : 0 or 1, if 1 the light source itself won't be visible. (default 0)
+`L <pos> <intensity> <color> [not-visible]`
+* `<intensity>` can be any positive float.
+*  It represents the distance at which objects hit straight-on by the light
+have 100% of their color.
+* `<not-visible>` : 0 or 1, if 1 the light source itself won't be visible. (default 0)
 
 Shape declarations :
-<shape-type> <shape-specific-args> <color> [<diff-coef> <spec-coef> <refl-coef> <checker> <bump-map> <bump-map-height>]
-	You can use the coefs to give a different feel to the material of the shape.
-	All coef between 0 and 1 (sum must be < 1).
-	<diff_coef> : proportion of the light reflected diffusely
-		You can think of diff_coef being 0.5 as meaning the same thing as having
-		the color be half as dark. (default 1)
-	<spec_coef> : proportion of the light reflected specularly (white spots) (default 0)
-	<refl_coef> : proportion of the light reflected in a mirror-like way. (default 0)
-	<checker> : 0 or 1, if 1 the shape's surface is checkered. (default 0)
-	<bump_map> : greyscale .xpm file representing heights to "paste" on a shape
-	<map_height> : can be any positive float
-		If map height is X the image will be "pasted" in such a way that there 
-		is X units of distance between the bottom and top pixels of the map.
-		Copies of the height map will be tiled over the surface if needed.
+`<shape-type> <shape-specific-args> <color> [<diff-coef> <spec-coef> <refl-coef> <checker> <bump-map> <bump-map-height>]`
+* You can use the coefs to give a different feel to the material of the shape.
+* All coef between 0 and 1 (sum must be < 1).
+* `<diff-coef>` : proportion of the light reflected diffusely
+*  You can think of diff-coef being 0.5 as meaning the same thing as having
+the color be half as dark. (default 1)
+* `<spec-coef>` : proportion of the light reflected specularly (white spots) (default 0)
+* `<refl-coef>` : proportion of the light reflected in a mirror-like way. (default 0)
+* `<checker>` : 0 or 1, if 1 the shape's surface is checkered. (default 0)
+* `<bump-map>` : greyscale .xpm file representing heights to "paste" on a shape
+* `<map-height>` : can be any positive float
+*  If map height is X the image will be "pasted" in such a way that there 
+is X units of distance between the bottom and top pixels of the map.
+Copies of the height map will be tiled over the surface if needed.
 
 Where the <shape-type> <shape-args> part is one of:
-	sp <center> <radius>
-	pl <origin> <normal>
-	cn <bottom-center> <direction> <diameter> <length>
-	cy <vertex> <direction> <diameter-at-1-unit-distance> <length>
-
-```
+* `sp <center> <radius>`
+* `pl <origin> <normal>`
+* `cn <bottom-center> <direction> <diameter> <length>`
+* `cy <vertex> <direction> <diameter-at-1-unit-distance> <length>`
