@@ -13,6 +13,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
+#include <poll.h>
 #include "shell.h"
 #include "render_scr.h"
 
@@ -50,7 +51,7 @@ void	exe_line(char *line, t_shell_data *t)
 # define RCLICK 2 
 #endif
 
-int	minirt_shell_hook(int button, int x, int y, t_shell_data *t)
+int	minirt_shell_ms_hook(int button, int x, int y, t_shell_data *t)
 {
 	char	*line;
 
@@ -66,3 +67,17 @@ int	minirt_shell_hook(int button, int x, int y, t_shell_data *t)
 	return (0);
 }
 #undef RCLICK
+
+int minirt_shell_loop_hook(t_shell_data *t)
+{
+	struct pollfd in = {0, POLLIN, 0};
+
+	poll(&in, 1, 50);
+	if (in.revents & POLLIN) {
+		char *line;
+		line = get_next_line(0);
+		exe_line(line, t);
+		free(line);
+	}
+	return (0);
+}

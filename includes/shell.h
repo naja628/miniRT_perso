@@ -70,6 +70,7 @@ int			dispatch(char *line, t_shell_data *t);
 
 // hook
 void		exe_line(char *line, t_shell_data *t);
-int			minirt_shell_hook(int button, int x, int y, t_shell_data *t);
+int			minirt_shell_ms_hook(int button, int x, int y, t_shell_data *t);
+int			minirt_shell_loop_hook(t_shell_data *t);
 
 #endif

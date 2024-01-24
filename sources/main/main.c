@@ -28,9 +28,10 @@ void	first_render(t_parse *intel, t_camera *cam, t_scr *scr)
 
 #define QUIT_EVENT 17
 
+//mlx_mouse_hook(scr->win, minirt_shell_hook, sh_data);
 static void	launch_mlx(t_scr *scr, t_shell_data *sh_data, t_mem *mem)
 {
-	mlx_mouse_hook(scr->win, minirt_shell_hook, sh_data);
+	mlx_loop_hook(scr->mlx, minirt_shell_loop_hook, sh_data);
 	mlx_key_hook(scr->win, ft_esc_exit_hook, mem);
 	mlx_hook(scr->win, QUIT_EVENT, 0, ft_quit, mem);
 	mlx_loop(scr->mlx);
