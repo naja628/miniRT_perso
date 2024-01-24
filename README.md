@@ -10,11 +10,11 @@ Key features include:
 * bump mapping
 
 ## Gallery
-![box](gallery/box.png)
 ![mirror](gallery/mirror.png)
+![earth](gallery/earth.png)
+![box](gallery/box.png)
 ![bicolor](gallery/bicolor.png)
 ![lampshade](gallery/lampshade.png)
-![earth](TODO)
 
 ## A Note about mlx
 This project uses the _mlx_.
@@ -27,8 +27,9 @@ For convenience reasons a copy of its source has been copied inside this repo
 but I obviously **don't own any of it**.
 
 ## Build
-On Unix systems, just 
-`make`.
+On Unix systems, just  
+`make`
+
 Windows not supported.
 
 ## Run
