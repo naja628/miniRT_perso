@@ -1,11 +1,11 @@
 ## About
-_miniRT_ is a simple Ray Tracer implemented C.
-It it a school project of 19 School, that I worked on with Xavier Le-Boulengé
-This is my personal fork.
+_miniRT_ is a simple Ray Tracer implemented C.  
+It it a school project of 19 School, that I worked on with Xavier Le Boulengé.  
+This is my personal fork.  
 
 Key features include:
 * support for multiple, colored, punctual light sources
-* a full Phong Shading model
+* ambient + diffuse + specular shading
 * mirror-like reflections
 * bump mapping
 
@@ -22,22 +22,26 @@ for interacting with the X window system.
 It is provided to students of the 42 network and is typically the only external library
 allowed for Graphical/event-driven projects.  
 For convenience reasons a copy of its source has been copied inside this repo
-but I obviously don't own any of it.
+but I obviously **don't own any of it**.
 
 ## Build
-On Unix systems, just `make`.
+On Unix systems, just 
+`make`.
 Windows not supported.
 
 ## Run
-Use `path/to/miniRT <scene_file>`
+Use:  
+`path/to/miniRT <scene_file>`
+
 The scene will eventually be rendered, you might need to wait up to 20 seconds-ish.
 
 Once launched the program has a shell with which you can move or transform objects
-in the scene, or the change the point of view. A full list of commands is provided
+in the scene, or the change the point of view, etc. A full list of commands is provided
 [here](doc.txt)
 
 ## Scene File Syntax
 You can find example scene files [here](scenes).
+
 The syntax is as follows:
 * 1 declaration per line
 * optional arguments are in brackets ([]), but they are positional so if you want to specify
@@ -47,7 +51,6 @@ a specific argument you also to specify all those that precede it.
 * colors are r,g,b using ints in [0, 255]
 
 Declaration can be one of:
-
 ```
 Camera declaration (exactly 1 required) :
 C <pos> <direction> <fov-in-degrees>
@@ -61,7 +64,7 @@ L <pos> <intensity> <color> [not-visible]
 	<intensity> can be any positive float.
 		It represents the distance at which objects hit straight-on by the light
 		have 100% of their color.
-	<no-flare> : 0 or 1, if 1 the light source itself won't be visible. (default 0)
+	<not-visible> : 0 or 1, if 1 the light source itself won't be visible. (default 0)
 
 Shape declarations :
 <shape-type> <shape-specific-args> <color> [<diff-coef> <spec-coef> <refl-coef> <checker> <bump-map> <bump-map-height>]
